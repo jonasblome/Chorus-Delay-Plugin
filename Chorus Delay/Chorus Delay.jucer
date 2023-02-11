@@ -4,9 +4,39 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               companyName="Blome">
   <MAINGROUP id="nQnpf4" name="Chorus Delay">
+    <GROUP id="{24A7005E-CAA2-CF16-F79F-06BD0B22FE52}" name="Panels">
+      <FILE id="RomMko" name="BlomePanelBase.cpp" compile="1" resource="0"
+            file="Source/BlomePanelBase.cpp"/>
+      <FILE id="ezyb8j" name="BlomePanelBase.h" compile="0" resource="0"
+            file="Source/BlomePanelBase.h"/>
+      <FILE id="mhSNLY" name="BlomeCenterPanel.cpp" compile="1" resource="0"
+            file="Source/BlomeCenterPanel.cpp"/>
+      <FILE id="IgzlC6" name="BlomeCenterPanel.h" compile="0" resource="0"
+            file="Source/BlomeCenterPanel.h"/>
+      <FILE id="bwD0Ka" name="BlomeCenterPanelMenuBar.cpp" compile="1" resource="0"
+            file="Source/BlomeCenterPanelMenuBar.cpp"/>
+      <FILE id="ouu6KG" name="BlomeCenterPanelMenuBar.h" compile="0" resource="0"
+            file="Source/BlomeCenterPanelMenuBar.h"/>
+      <FILE id="eNY5qi" name="BlomeFXPanel.cpp" compile="1" resource="0"
+            file="Source/BlomeFXPanel.cpp"/>
+      <FILE id="jjISMU" name="BlomeFXPanel.h" compile="0" resource="0" file="Source/BlomeFXPanel.h"/>
+      <FILE id="m5Ro4Q" name="BlomeGainPanel.cpp" compile="1" resource="0"
+            file="Source/BlomeGainPanel.cpp"/>
+      <FILE id="jWK4CI" name="BlomeGainPanel.h" compile="0" resource="0"
+            file="Source/BlomeGainPanel.h"/>
+      <FILE id="DTDjSh" name="BlomeMainPanel.cpp" compile="1" resource="0"
+            file="Source/BlomeMainPanel.cpp"/>
+      <FILE id="GXr1a9" name="BlomeMainPanel.h" compile="0" resource="0"
+            file="Source/BlomeMainPanel.h"/>
+      <FILE id="JH8oZo" name="BlomeTopPanel.cpp" compile="1" resource="0"
+            file="Source/BlomeTopPanel.cpp"/>
+      <FILE id="zEqXE0" name="BlomeTopPanel.h" compile="0" resource="0" file="Source/BlomeTopPanel.h"/>
+    </GROUP>
     <GROUP id="{1B158FDA-A3EA-9305-D30B-980E37E8E732}" name="Helpers">
       <FILE id="idvGYF" name="BlomeAudioHelper.h" compile="0" resource="0"
             file="Source/BlomeAudioHelper.h"/>
+      <FILE id="Ox3hPw" name="BlomeInterfaceDefines.h" compile="0" resource="0"
+            file="Source/BlomeInterfaceDefines.h"/>
     </GROUP>
     <GROUP id="{57F9C886-7AE8-70C3-9A2F-D4F8A89D8E15}" name="DSP">
       <FILE id="BdYaJB" name="BlomeDelay.cpp" compile="1" resource="0" file="Source/BlomeDelay.cpp"/>
