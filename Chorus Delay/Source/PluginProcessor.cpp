@@ -167,14 +167,16 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
                                 channelData,
                                 buffer.getNumSamples());
         
-        mLFO[channel]->process(0.25,
-                               0.5,
+        float rate = (channel == 0) ? 0: 0.25f;
+        
+        mLFO[channel]->process(rate,
+                               1.0,
                                buffer.getNumSamples());
         
         mDelay[channel]->process(channelData,
                                  0.25,
                                  0.5,
-                                 0.35,
+                                 1.0,
                                  mLFO[channel]->getBuffer(),
                                  channelData,
                                  buffer.getNumSamples());

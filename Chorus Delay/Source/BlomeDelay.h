@@ -39,5 +39,7 @@ private:
     double mBuffer[maxBufferSize];
     double mFeedbackSample;
     
+    float mTimeSmoothed;
+    
     int mDelayIndex;
 };

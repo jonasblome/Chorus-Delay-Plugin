@@ -15,6 +15,7 @@
 BlomeDelay::BlomeDelay()
 :   mSampleRate(-1),
     mFeedbackSample(0.0),
+    mTimeSmoothed(0),
     mDelayIndex(0)
 {
     reset();
@@ -30,6 +31,7 @@ void BlomeDelay::setSampleRate(double inSampleRate)
 
 void BlomeDelay::reset()
 {
+    mTimeSmoothed = 0.0f;
     juce::zeromem(mBuffer, sizeof(double) * maxBufferSize);
 }
 
@@ -42,19 +44,22 @@ void BlomeDelay::process(float* inAudio,
              int inNumSamplesToRender)
 {
     const float wet = inWetDry;
-    const float dry = 1.0f - inWetDry;
+    const float dry = 1.0f - wet;
     const float feedbackMapped = juce::jmap<float>(inFeedback, 0.0f, 1.0f, 0.0f, 0.95f);
     
     for(int i = 0; i< inNumSamplesToRender; i++) {
-        const double delayTimeModulation = (0.003 + (0.002 * inModulationBuffer[i]));
-        const double delayTimeInSamples = (inTime * delayTimeModulation * mSampleRate);
+        const double delayTimeModulation = inTime + (0.002 * inModulationBuffer[i]);
+
+        mTimeSmoothed = mTimeSmoothed - kParameterSmoothingCoeff_Fine * (mTimeSmoothed - delayTimeModulation);
+        
+        const double delayTimeInSamples = mTimeSmoothed * mSampleRate;
         const double sample = getInterpolatedSample(delayTimeInSamples);
         
         mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * feedbackMapped);
         
         mFeedbackSample = sample;
         
-        outAudio[i] = (inAudio[i] * dry + sample * wet);
+        outAudio[i] = inAudio[i] * dry + sample * wet;
         
         mDelayIndex++;
         
