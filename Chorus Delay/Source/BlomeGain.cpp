@@ -14,11 +14,9 @@
 
 BlomeGain::BlomeGain()
 {
-    
 }
 BlomeGain::~BlomeGain()
 {
-    
 }
 
 void BlomeGain::process(float* inAudio,

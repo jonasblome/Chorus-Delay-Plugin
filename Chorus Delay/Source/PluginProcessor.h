@@ -11,6 +11,8 @@
 #include <JuceHeader.h>
 
 #include "BlomeGain.h"
+#include "BlomeDelay.h"
+#include "BlomeLFO.h"
 
 //==============================================================================
 /**
@@ -63,6 +65,8 @@ private:
     void initializeDSP();
     
     std::unique_ptr<BlomeGain> mGain [2];
+    std::unique_ptr<BlomeDelay> mDelay [2];
+    std::unique_ptr<BlomeLFO> mLFO [2];
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChorusDelayAudioProcessor)

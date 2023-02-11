@@ -22,6 +22,7 @@ ChorusDelayAudioProcessor::ChorusDelayAudioProcessor()
                        )
 #endif
 {
+    initializeDSP();
 }
 
 ChorusDelayAudioProcessor::~ChorusDelayAudioProcessor()
@@ -93,14 +94,20 @@ void ChorusDelayAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void ChorusDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    for(int i = 0; i < 2; i++) {
+        mDelay[i]->setSampleRate(sampleRate);
+        mLFO[i]->setSampleRate(sampleRate);
+    }
 }
 
 void ChorusDelayAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+    for(int i = 0; i < 2; i++) {
+        mDelay[i]->reset();
+        mLFO[i]->reset();
+    }
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -141,8 +148,9 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
+    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
         buffer.clear (i, 0, buffer.getNumSamples());
+    }
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
@@ -152,12 +160,24 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+        auto* channelData = buffer.getWritePointer(channel);
 
         mGain[channel]->process(channelData,
                                 0.5,
                                 channelData,
                                 buffer.getNumSamples());
+        
+        mLFO[channel]->process(0.25,
+                               0.5,
+                               buffer.getNumSamples());
+        
+        mDelay[channel]->process(channelData,
+                                 0.25,
+                                 0.5,
+                                 0.35,
+                                 mLFO[channel]->getBuffer(),
+                                 channelData,
+                                 buffer.getNumSamples());
     }
 }
 
@@ -189,7 +209,9 @@ void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeI
 void ChorusDelayAudioProcessor::initializeDSP()
 {
     for(int i = 0; i < 2; i++) {
-        mGain[i] = std::unique_ptr<BlomeGain>();
+        mGain[i] = std::make_unique<BlomeGain>();
+        mDelay[i] = std::make_unique<BlomeDelay>();
+        mLFO[i] = std::make_unique<BlomeLFO>();
     }
 }
 
