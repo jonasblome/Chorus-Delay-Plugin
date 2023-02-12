@@ -145,6 +145,7 @@
 		C7B2657FD453DEB5F6BB4970 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		CF043C1A8ABCC1B2383327FE /* BlomeCenterPanel.cpp */ /* BlomeCenterPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeCenterPanel.cpp; path = ../../Source/BlomeCenterPanel.cpp; sourceTree = SOURCE_ROOT; };
 		CFC4C05ADDAA02E589139289 /* RecentFilesMenuTemplate.nib */ /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
+		D4608855629498AAE8E5F59A /* BlomeParameters.h */ /* BlomeParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeParameters.h; path = ../../Source/BlomeParameters.h; sourceTree = SOURCE_ROOT; };
 		D57FE3D7F19EF78A1DB8541B /* BlomeCenterPanelMenuBar.cpp */ /* BlomeCenterPanelMenuBar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeCenterPanelMenuBar.cpp; path = ../../Source/BlomeCenterPanelMenuBar.cpp; sourceTree = SOURCE_ROOT; };
 		D6C5D72CD909037228439A2E /* include_juce_gui_extra.mm */ /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
 		D70C54E364C5F19DC080BFCE /* BlomeTopPanel.h */ /* BlomeTopPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeTopPanel.h; path = ../../Source/BlomeTopPanel.h; sourceTree = SOURCE_ROOT; };
@@ -254,6 +255,7 @@
 			children = (
 				9E06A94BC154BE408E1851A1,
 				AF0FD4163259E06D8DF4949A,
+				D4608855629498AAE8E5F59A,
 			);
 			name = Helpers;
 			sourceTree = "<group>";

@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "BlomeParameters.h"
 
 //==============================================================================
 ChorusDelayAudioProcessor::ChorusDelayAudioProcessor()
@@ -19,9 +20,11 @@ ChorusDelayAudioProcessor::ChorusDelayAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+        parameters(*this, nullptr)
 #endif
 {
+    initializeParameters();
     initializeDSP();
 }
 
@@ -163,20 +166,20 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         auto* channelData = buffer.getWritePointer(channel);
 
         mGain[channel]->process(channelData,
-                                0.5,
+                                parameters.getParameter(BlomeParameterID[kParameter_InputGain])->getValue(),
                                 channelData,
                                 buffer.getNumSamples());
         
-        float rate = (channel == 0) ? 0: 0.25f;
+        float rate = (channel == 0) ? 0: parameters.getParameter(BlomeParameterID[kParameter_ModulationRate])->getValue();
         
         mLFO[channel]->process(rate,
-                               1.0,
+                               parameters.getParameter(BlomeParameterID[kParameter_ModulationDepth])->getValue(),
                                buffer.getNumSamples());
         
         mDelay[channel]->process(channelData,
-                                 0.25,
-                                 0.5,
-                                 1.0,
+                                 parameters.getParameter(BlomeParameterID[kParameter_DelayTime])->getValue(),
+                                 parameters.getParameter(BlomeParameterID[kParameter_DelayFeedback])->getValue(),
+                                 parameters.getParameter(BlomeParameterID[kParameter_DelayWetDry])->getValue(),
                                  mLFO[channel]->getBuffer(),
                                  channelData,
                                  buffer.getNumSamples());
@@ -214,6 +217,21 @@ void ChorusDelayAudioProcessor::initializeDSP()
         mGain[i] = std::make_unique<BlomeGain>();
         mDelay[i] = std::make_unique<BlomeDelay>();
         mLFO[i] = std::make_unique<BlomeLFO>();
+    }
+}
+
+void ChorusDelayAudioProcessor::initializeParameters()
+{
+    using Parameter = juce::AudioProcessorValueTreeState::Parameter;
+    
+    for(int i = 0; i < kParameter_TotalNumParameters; i++) {
+        parameters.createAndAddParameter(std::make_unique<Parameter> (BlomeParameterID[i],
+                                                           BlomeParameterID[i],
+                                                           BlomeParameterID[i],
+                                                           juce::NormalisableRange<float>(0.0f, 1.0f),
+                                                           0.5f,
+                                                           nullptr,
+                                                           nullptr));
     }
 }
 

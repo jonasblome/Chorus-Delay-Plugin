@@ -59,10 +59,13 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    juce::AudioProcessorValueTreeState parameters;
 
 private:
     // Internal
     void initializeDSP();
+    void initializeParameters();
     
     std::unique_ptr<BlomeGain> mGain [2];
     std::unique_ptr<BlomeDelay> mDelay [2];

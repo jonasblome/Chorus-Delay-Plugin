@@ -37,6 +37,8 @@
             file="Source/BlomeAudioHelper.h"/>
       <FILE id="Ox3hPw" name="BlomeInterfaceDefines.h" compile="0" resource="0"
             file="Source/BlomeInterfaceDefines.h"/>
+      <FILE id="jiYkTp" name="BlomeParameters.h" compile="0" resource="0"
+            file="Source/BlomeParameters.h"/>
     </GROUP>
     <GROUP id="{57F9C886-7AE8-70C3-9A2F-D4F8A89D8E15}" name="DSP">
       <FILE id="BdYaJB" name="BlomeDelay.cpp" compile="1" resource="0" file="Source/BlomeDelay.cpp"/>
