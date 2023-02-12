@@ -9,3 +9,28 @@
 */
 
 #pragma once
+
+#include "BlomePanelBase.h"
+
+enum BlomeFXPanelStyle
+{
+    kBlomeFXPanelStyle_Delay,
+    kBlomeFXPanelStyle_Chorus,
+    kBlomeFXPanelStyle_TotalNumStyles
+};
+
+class BlomeFXPanel
+:   public BlomePanelBase
+{
+public:
+    BlomeFXPanel(ChorusDelayAudioProcessor* inProcessor);
+    ~BlomeFXPanel();
+    
+    void paint(juce::Graphics& g) override;
+    
+    void setFXPanelStyle(BlomeFXPanelStyle inStyle);
+    
+private:
+    BlomeFXPanelStyle mStyle;
+    
+};

@@ -9,3 +9,14 @@
 */
 
 #include "BlomeGainPanel.h"
+
+BlomeGainPanel::BlomeGainPanel(ChorusDelayAudioProcessor* inProcessor)
+:   BlomePanelBase(inProcessor)
+{
+    setSize(GAIN_PANEL_WIDTH, GAIN_PANEL_HEIGHT);
+}
+
+BlomeGainPanel::~BlomeGainPanel()
+{
+    
+}

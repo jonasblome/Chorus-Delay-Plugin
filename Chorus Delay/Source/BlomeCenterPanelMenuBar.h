@@ -9,3 +9,15 @@
 */
 
 #pragma once
+
+#include "BlomePanelBase.h"
+
+class BlomeCenterPanelMenuBar
+:   public BlomePanelBase
+{
+public:
+    BlomeCenterPanelMenuBar(ChorusDelayAudioProcessor* inProcessor);
+    ~BlomeCenterPanelMenuBar();
+    
+private:
+};

@@ -11,6 +11,9 @@
 #pragma once
 
 #include "BlomePanelBase.h"
+#include "BlomeTopPanel.h"
+#include "BlomeGainPanel.h"
+#include "BlomeCenterPanel.h"
 
 class BlomeMainPanel
 :   public BlomePanelBase
@@ -20,5 +23,8 @@ public:
     ~BlomeMainPanel();
     
 private:
-    
+    std::unique_ptr<BlomeTopPanel> mTopPanel;
+    std::unique_ptr<BlomeGainPanel> mInputGainPanel;
+    std::unique_ptr<BlomeGainPanel> mOutputGainPanel;
+    std::unique_ptr<BlomeCenterPanel> mCenterPanel;
 };

@@ -9,3 +9,22 @@
 */
 
 #include "BlomeCenterPanel.h"
+
+BlomeCenterPanel::BlomeCenterPanel(ChorusDelayAudioProcessor* inProcessor)
+:   BlomePanelBase(inProcessor)
+{
+    setSize(CENTER_PANEL_WIDTH, CENTER_PANEL_HEIGHT);
+    
+    mMenuBar = std::make_unique<BlomeCenterPanelMenuBar>(inProcessor);
+    mMenuBar->setTopLeftPosition(0, 0);
+    addAndMakeVisible(*mMenuBar);
+    
+    mFXPanel = std::make_unique<BlomeFXPanel>(inProcessor);
+    mFXPanel->setTopLeftPosition(0, CENTER_PANEL_MENU_BAR_HEIGHT);
+    addAndMakeVisible(*mFXPanel);
+}
+
+BlomeCenterPanel::~BlomeCenterPanel()
+{
+    
+}

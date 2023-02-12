@@ -9,3 +9,18 @@
 */
 
 #pragma once
+
+#include "BlomePanelBase.h"
+
+class BlomeTopPanel
+:   public BlomePanelBase
+{
+public:
+    BlomeTopPanel(ChorusDelayAudioProcessor* inProcessor);
+    ~BlomeTopPanel();
+    
+    void paint(juce::Graphics& g) override;
+    
+private:
+    
+};

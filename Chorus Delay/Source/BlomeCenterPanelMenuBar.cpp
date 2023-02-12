@@ -9,3 +9,14 @@
 */
 
 #include "BlomeCenterPanelMenuBar.h"
+
+BlomeCenterPanelMenuBar::BlomeCenterPanelMenuBar(ChorusDelayAudioProcessor* inProcessor)
+:   BlomePanelBase(inProcessor)
+{
+    setSize(CENTER_PANEL_MENU_BAR_WIDTH, CENTER_PANEL_MENU_BAR_HEIGHT);
+}
+
+BlomeCenterPanelMenuBar::~BlomeCenterPanelMenuBar()
+{
+    
+}
