@@ -17,14 +17,16 @@ BlomeCenterPanel::BlomeCenterPanel(ChorusDelayAudioProcessor* inProcessor)
     
     mMenuBar = std::make_unique<BlomeCenterPanelMenuBar>(inProcessor);
     mMenuBar->setTopLeftPosition(0, 0);
-    addAndMakeVisible(*mMenuBar);
+    addAndMakeVisible(mMenuBar.get());
     
     mFXPanel = std::make_unique<BlomeFXPanel>(inProcessor);
     mFXPanel->setTopLeftPosition(0, CENTER_PANEL_MENU_BAR_HEIGHT);
-    addAndMakeVisible(*mFXPanel);
+    addAndMakeVisible(mFXPanel.get());
+    
+    mMenuBar->addFXTypeComboBoxListener(mFXPanel.get());
 }
 
 BlomeCenterPanel::~BlomeCenterPanel()
 {
-    
+    mMenuBar->removeFXTypeComboBoxListener(mFXPanel.get());
 }

@@ -11,6 +11,7 @@
 #pragma once
 
 #include "BlomePanelBase.h"
+#include "BlomeParameterSlider.h"
 
 class BlomeGainPanel
 :   public BlomePanelBase
@@ -19,6 +20,11 @@ public:
     BlomeGainPanel(ChorusDelayAudioProcessor* inProcessor);
     ~BlomeGainPanel();
     
+    void paint(juce::Graphics& g) override;
+    
+    void setParameterID(int inParameterID);
+    
 private:
+    std::unique_ptr<BlomeParameterSlider> mSlider;
     
 };

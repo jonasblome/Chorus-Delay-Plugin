@@ -9,6 +9,7 @@
 */
 
 #include "BlomeMainPanel.h"
+#include "BlomeParameters.h"
 
 BlomeMainPanel::BlomeMainPanel(ChorusDelayAudioProcessor* inProcessor)
 :   BlomePanelBase(inProcessor)
@@ -21,15 +22,17 @@ BlomeMainPanel::BlomeMainPanel(ChorusDelayAudioProcessor* inProcessor)
     
     mInputGainPanel = std::make_unique<BlomeGainPanel>(inProcessor);
     mInputGainPanel->setTopLeftPosition(0, TOP_PANEL_HEIGHT);
-    addAndMakeVisible(*mInputGainPanel);
+    mInputGainPanel->setParameterID(kParameter_InputGain);
+    addAndMakeVisible(mInputGainPanel.get());
     
     mOutputGainPanel = std::make_unique<BlomeGainPanel>(inProcessor);
     mOutputGainPanel->setTopLeftPosition(MAIN_PANEL_WIDTH - GAIN_PANEL_WIDTH, TOP_PANEL_HEIGHT);
-    addAndMakeVisible(*mOutputGainPanel);
+    mOutputGainPanel->setParameterID(kParameter_OutputGain);
+    addAndMakeVisible(mOutputGainPanel.get());
     
     mCenterPanel = std::make_unique<BlomeCenterPanel>(inProcessor);
     mCenterPanel->setTopLeftPosition(GAIN_PANEL_WIDTH, TOP_PANEL_HEIGHT);
-    addAndMakeVisible(*mCenterPanel);
+    addAndMakeVisible(mCenterPanel.get());
 }
 
 BlomeMainPanel::~BlomeMainPanel()

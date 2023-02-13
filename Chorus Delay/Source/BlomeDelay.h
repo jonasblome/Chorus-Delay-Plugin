@@ -12,6 +12,12 @@
 
 #include "BlomeAudioHelper.h"
 
+enum BlomeDelayType
+{
+    kBlomeDelayType_Delay = 0,
+    kBlomeDelayType_Chorus,
+};
+
 class BlomeDelay
 {
 public:
@@ -26,6 +32,7 @@ public:
                  float inTime,
                  float inFeedback,
                  float inWetDry,
+                 float inType,
                  float* inModulationBuffer,
                  float* outAudio,
                  int inNumSamplesToRender);

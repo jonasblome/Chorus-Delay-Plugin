@@ -165,7 +165,7 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     {
         auto* channelData = buffer.getWritePointer(channel);
 
-        mGain[channel]->process(channelData,
+        mInputGain[channel]->process(channelData,
                                 parameters.getParameter(BlomeParameterID[kParameter_InputGain])->getValue(),
                                 channelData,
                                 buffer.getNumSamples());
@@ -180,9 +180,15 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
                                  parameters.getParameter(BlomeParameterID[kParameter_DelayTime])->getValue(),
                                  parameters.getParameter(BlomeParameterID[kParameter_DelayFeedback])->getValue(),
                                  parameters.getParameter(BlomeParameterID[kParameter_DelayWetDry])->getValue(),
+                                 parameters.getParameter(BlomeParameterID[kParameter_DelayType])->getValue(),
                                  mLFO[channel]->getBuffer(),
                                  channelData,
                                  buffer.getNumSamples());
+        
+        mOutputGain[channel]->process(channelData,
+                                      parameters.getParameter(BlomeParameterID[kParameter_OutputGain])->getValue(),
+                                      channelData,
+                                      buffer.getNumSamples());
     }
 }
 
@@ -214,7 +220,8 @@ void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeI
 void ChorusDelayAudioProcessor::initializeDSP()
 {
     for(int i = 0; i < 2; i++) {
-        mGain[i] = std::make_unique<BlomeGain>();
+        mInputGain[i] = std::make_unique<BlomeGain>();
+        mOutputGain[i] = std::make_unique<BlomeGain>();
         mDelay[i] = std::make_unique<BlomeDelay>();
         mLFO[i] = std::make_unique<BlomeLFO>();
     }

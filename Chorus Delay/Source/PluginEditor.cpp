@@ -18,7 +18,7 @@ ChorusDelayAudioProcessorEditor::ChorusDelayAudioProcessorEditor (ChorusDelayAud
     setSize (MAIN_PANEL_WIDTH, MAIN_PANEL_HEIGHT);
     
     mMainPanel = std::make_unique<BlomeMainPanel>(&audioProcessor);
-    addAndMakeVisible(*mMainPanel);
+    addAndMakeVisible(mMainPanel.get());
 }
 
 ChorusDelayAudioProcessorEditor::~ChorusDelayAudioProcessorEditor()

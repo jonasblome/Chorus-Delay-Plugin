@@ -11,13 +11,19 @@
 #pragma once
 
 #include "BlomePanelBase.h"
+#include "BlomeParameterComboBox.h"
 
 class BlomeCenterPanelMenuBar
 :   public BlomePanelBase
 {
 public:
     BlomeCenterPanelMenuBar(ChorusDelayAudioProcessor* inProcessor);
-    ~BlomeCenterPanelMenuBar();
+    ~BlomeCenterPanelMenuBar() override;
+    
+    void addFXTypeComboBoxListener(juce::ComboBox::Listener* inListener);
+    void removeFXTypeComboBoxListener(juce::ComboBox::Listener* inListener);
     
 private:
+    std::unique_ptr<BlomeParameterComboBox> mFxTypeComboBox;
+    
 };

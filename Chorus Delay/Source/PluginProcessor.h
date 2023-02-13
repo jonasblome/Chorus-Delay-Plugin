@@ -67,7 +67,8 @@ private:
     void initializeDSP();
     void initializeParameters();
     
-    std::unique_ptr<BlomeGain> mGain [2];
+    std::unique_ptr<BlomeGain> mInputGain [2];
+    std::unique_ptr<BlomeGain> mOutputGain [2];
     std::unique_ptr<BlomeDelay> mDelay [2];
     std::unique_ptr<BlomeLFO> mLFO [2];
     

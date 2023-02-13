@@ -39,6 +39,7 @@ void BlomeDelay::process(float* inAudio,
              float inTime,
              float inFeedback,
              float inWetDry,
+             float inType,
              float* inModulationBuffer,
              float* outAudio,
              int inNumSamplesToRender)
@@ -48,9 +49,13 @@ void BlomeDelay::process(float* inAudio,
     const float feedbackMapped = juce::jmap<float>(inFeedback, 0.0f, 1.0f, 0.0f, 0.95f);
     
     for(int i = 0; i< inNumSamplesToRender; i++) {
-        const double delayTimeModulation = inTime + (0.002 * inModulationBuffer[i]);
-
-        mTimeSmoothed = mTimeSmoothed - kParameterSmoothingCoeff_Fine * (mTimeSmoothed - delayTimeModulation);
+        if((int)inType == kBlomeDelayType_Delay) {
+            mTimeSmoothed = mTimeSmoothed - kParameterSmoothingCoeff_Fine * (mTimeSmoothed - inTime);
+        }
+        else {
+            const double delayTimeModulation = 0.003 + (0.002 * inModulationBuffer[i]);
+            mTimeSmoothed = mTimeSmoothed - kParameterSmoothingCoeff_Fine * (mTimeSmoothed - delayTimeModulation);
+        }
         
         const double delayTimeInSamples = mTimeSmoothed * mSampleRate;
         const double sample = getInterpolatedSample(delayTimeInSamples);

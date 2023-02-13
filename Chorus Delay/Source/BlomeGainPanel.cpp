@@ -9,6 +9,8 @@
 */
 
 #include "BlomeGainPanel.h"
+#include "BlomeParameters.h"
+#include "BlomeHelperFunctions.h"
 
 BlomeGainPanel::BlomeGainPanel(ChorusDelayAudioProcessor* inProcessor)
 :   BlomePanelBase(inProcessor)
@@ -19,4 +21,25 @@ BlomeGainPanel::BlomeGainPanel(ChorusDelayAudioProcessor* inProcessor)
 BlomeGainPanel::~BlomeGainPanel()
 {
     
+}
+
+void BlomeGainPanel::paint(juce::Graphics& g)
+{
+    BlomePanelBase::paint(g);
+    
+    if(mSlider) {
+        paintComponentLabel(g, mSlider.get());
+    }
+}
+
+void BlomeGainPanel::setParameterID(int inParameterID)
+{
+    mSlider = std::make_unique<BlomeParameterSlider>(mProcessor->parameters, BlomeParameterID[inParameterID]);
+    const int slider_size = 54;
+    
+    mSlider->setBounds(getWidth() * 0.5 - slider_size * 0.5,
+                       getHeight() * 0.5 - slider_size * 0.5,
+                       slider_size,
+                       slider_size);
+    addAndMakeVisible(mSlider.get());
 }

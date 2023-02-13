@@ -11,6 +11,7 @@
 #pragma once
 
 #include "BlomePanelBase.h"
+#include "BlomeParameterSlider.h"
 
 enum BlomeFXPanelStyle
 {
@@ -20,7 +21,8 @@ enum BlomeFXPanelStyle
 };
 
 class BlomeFXPanel
-:   public BlomePanelBase
+:   public BlomePanelBase,
+    public juce::ComboBox::Listener
 {
 public:
     BlomeFXPanel(ChorusDelayAudioProcessor* inProcessor);
@@ -30,7 +32,10 @@ public:
     
     void setFXPanelStyle(BlomeFXPanelStyle inStyle);
     
+    void comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged) override;
+    
 private:
     BlomeFXPanelStyle mStyle;
+    juce::OwnedArray<BlomeParameterSlider> mSliders;
     
 };
