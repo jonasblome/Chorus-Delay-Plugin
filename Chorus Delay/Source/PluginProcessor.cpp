@@ -26,6 +26,8 @@ ChorusDelayAudioProcessor::ChorusDelayAudioProcessor()
 {
     initializeParameters();
     initializeDSP();
+    
+    mPresetManager = std::make_unique<BlomePresetManager>(this);
 }
 
 ChorusDelayAudioProcessor::~ChorusDelayAudioProcessor()
@@ -209,12 +211,32 @@ void ChorusDelayAudioProcessor::getStateInformation (juce::MemoryBlock& destData
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    
+    juce::XmlElement preset("Blome_StateInfo");
+    juce::XmlElement* presetBody = new juce::XmlElement("Blome_Preset");
+    
+    mPresetManager->getXmlForPreset(*presetBody);
+    
+    preset.addChildElement(presetBody);
+    copyXmlToBinary(preset, destData);
 }
 
 void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    
+    juce::XmlElement xmlState = *getXmlFromBinary(data, sizeInBytes);
+    juce::XmlElement* xmlStatePtr = &xmlState;
+    
+    if(xmlStatePtr) {
+        for(auto* element: xmlStatePtr->getChildWithTagNameIterator("")) {
+            mPresetManager->loadPresetForXml(*element);
+        }
+    }
+    else {
+        jassertfalse;
+    }
 }
 
 void ChorusDelayAudioProcessor::initializeDSP()

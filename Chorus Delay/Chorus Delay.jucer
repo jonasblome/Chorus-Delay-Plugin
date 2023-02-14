@@ -4,6 +4,12 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
               companyName="Blome">
   <MAINGROUP id="nQnpf4" name="Chorus Delay">
+    <GROUP id="{B55644E6-BE3C-E85E-D2D7-5ACC3D423D3E}" name="Managers">
+      <FILE id="sxBz7r" name="BlomePresetManager.cpp" compile="1" resource="0"
+            file="Source/BlomePresetManager.cpp"/>
+      <FILE id="YEqWiZ" name="BlomePresetManager.h" compile="0" resource="0"
+            file="Source/BlomePresetManager.h"/>
+    </GROUP>
     <GROUP id="{18F274C9-4327-94CA-5C46-319828AE38AF}" name="Parameter Control">
       <FILE id="QFe5DN" name="BlomeParameterComboBox.cpp" compile="1" resource="0"
             file="Source/BlomeParameterComboBox.cpp"/>

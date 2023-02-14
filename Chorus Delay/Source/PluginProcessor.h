@@ -13,6 +13,7 @@
 #include "BlomeGain.h"
 #include "BlomeDelay.h"
 #include "BlomeLFO.h"
+#include "BlomePresetManager.h"
 
 //==============================================================================
 /**
@@ -71,6 +72,8 @@ private:
     std::unique_ptr<BlomeGain> mOutputGain [2];
     std::unique_ptr<BlomeDelay> mDelay [2];
     std::unique_ptr<BlomeLFO> mLFO [2];
+    
+    std::unique_ptr<BlomePresetManager> mPresetManager;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChorusDelayAudioProcessor)

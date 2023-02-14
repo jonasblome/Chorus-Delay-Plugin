@@ -40,6 +40,7 @@
 		4F255066F5AB01753FBE5134 /* PluginEditor.cpp */ = {isa = PBXBuildFile; fileRef = 28A07A94D6A013AB97D878BE; };
 		5681A270BE2C815424187B08 /* include_juce_audio_processors.mm */ = {isa = PBXBuildFile; fileRef = 8A1041F5C48F4F7DCAE2B943; };
 		59146B472769931C4769BC2F /* CoreMIDI.framework */ = {isa = PBXBuildFile; fileRef = EA8C7E96D7648DED72D98A98; };
+		5CE2DE7CA8D105ECA7FC7872 /* BlomePresetManager.cpp */ = {isa = PBXBuildFile; fileRef = 21A1C8A54605986107B76E07; };
 		60726016035167A72C11C63D /* WebKit.framework */ = {isa = PBXBuildFile; fileRef = 24EB63EF84EE0D6F58DFA4F3; };
 		60CE60AB2A490A2B5314CC23 /* AU */ = {isa = PBXBuildFile; fileRef = 9805FD177B12EA8C44870128; };
 		695B0AFCC6F609814D99BC35 /* Standalone Plugin */ = {isa = PBXBuildFile; fileRef = F8B9B8B6C40F8DCB01D16241; };
@@ -86,6 +87,7 @@
 		1167F421A22D1106F709B66F /* BlomeCenterPanelMenuBar.h */ /* BlomeCenterPanelMenuBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeCenterPanelMenuBar.h; path = ../../Source/BlomeCenterPanelMenuBar.h; sourceTree = SOURCE_ROOT; };
 		18B38132F7BC978A08DF8180 /* include_juce_audio_plugin_client_utils.cpp */ /* include_juce_audio_plugin_client_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_utils.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_utils.cpp; sourceTree = SOURCE_ROOT; };
 		20113C4F7DA101D3F056E722 /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chorus Delay.vst3"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A1C8A54605986107B76E07 /* BlomePresetManager.cpp */ /* BlomePresetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomePresetManager.cpp; path = ../../Source/BlomePresetManager.cpp; sourceTree = SOURCE_ROOT; };
 		21B8D5E4F5D6BF675CA06A59 /* juce_audio_plugin_client */ /* juce_audio_plugin_client */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_plugin_client; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_plugin_client; sourceTree = "<absolute>"; };
 		2203AF40CBD32CB89AC425F1 /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
 		24D2BE03E4E50FCBB9447EB9 /* BlomeTopPanel.cpp */ /* BlomeTopPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeTopPanel.cpp; path = ../../Source/BlomeTopPanel.cpp; sourceTree = SOURCE_ROOT; };
@@ -162,6 +164,7 @@
 		F0CCA5EAF0B41F652E24CFF8 /* include_juce_audio_utils.mm */ /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
 		F18EE86C1F5E2C596964C392 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_basics; sourceTree = "<absolute>"; };
 		F6A4F2E13EB3FBEA580DF5DE /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_formats; sourceTree = "<absolute>"; };
+		F7ED5576FE2F2697578BA0FF /* BlomePresetManager.h */ /* BlomePresetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomePresetManager.h; path = ../../Source/BlomePresetManager.h; sourceTree = SOURCE_ROOT; };
 		F8B9B8B6C40F8DCB01D16241 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chorus Delay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8E96B132CF737128322FABD /* CoreAudioKit.framework */ /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -268,6 +271,15 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		44A48B4B18C1910E251C75F4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				21A1C8A54605986107B76E07,
+				F7ED5576FE2F2697578BA0FF,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		73CDA564614D2A01C9626821 /* Panels */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +377,7 @@
 		CF3EFDBAD5274464075A352C /* Chorus Delay */ = {
 			isa = PBXGroup;
 			children = (
+				44A48B4B18C1910E251C75F4,
 				9134F5DE98A2C82C8366484D,
 				73CDA564614D2A01C9626821,
 				1872F04DE6701E792388E681,
@@ -659,6 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE2DE7CA8D105ECA7FC7872,
 				F8A4E5BDC28A8029E0CBB4B2,
 				2168D95038DAC973B65216ED,
 				F9E651C020853DBFEC386D4C,
