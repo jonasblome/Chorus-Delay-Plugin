@@ -25,6 +25,18 @@ enum BlomeParameter
 
 static juce::String BlomeParameterID [kParameter_TotalNumParameters] =
 {
+    "InputGain",
+    "Time",
+    "Feedback",
+    "WetDry",
+    "Type",
+    "OutputGain",
+    "ModulationRate",
+    "ModulationDepth",
+};
+
+static juce::String BlomeParameterNames [kParameter_TotalNumParameters] =
+{
     "Input Gain",
     "Time",
     "Feedback",

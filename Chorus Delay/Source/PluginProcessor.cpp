@@ -230,8 +230,8 @@ void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeI
     juce::XmlElement* xmlStatePtr = &xmlState;
     
     if(xmlStatePtr) {
-        for(auto* element: xmlStatePtr->getChildWithTagNameIterator("")) {
-            mPresetManager->loadPresetForXml(*element);
+        for(auto* child: xmlStatePtr->getChildIterator()){
+            mPresetManager->loadPresetForXml(*child);
         }
     }
     else {
@@ -255,8 +255,8 @@ void ChorusDelayAudioProcessor::initializeParameters()
     
     for(int i = 0; i < kParameter_TotalNumParameters; i++) {
         parameters.createAndAddParameter(std::make_unique<Parameter> (BlomeParameterID[i],
-                                                           BlomeParameterID[i],
-                                                           BlomeParameterID[i],
+                                                           BlomeParameterNames[i],
+                                                           BlomeParameterNames[i],
                                                            juce::NormalisableRange<float>(0.0f, 1.0f),
                                                            0.5f,
                                                            nullptr,

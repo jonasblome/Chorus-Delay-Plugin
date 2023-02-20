@@ -25,7 +25,7 @@ void BlomePresetManager::getXmlForPreset(juce::XmlElement inElement)
     const int numParameters = mProcessor->getParameters().size();
     
     for(int i = 0; i < numParameters; i++) {
-        inElement.setAttribute(mProcessor->getParameters()[i]->getName(20), mProcessor->getParameters()[i]->getValue());
+        inElement.setAttribute(mProcessor->getParameters()[i]->getName(30), mProcessor->getParameters()[i]->getValue());
     }
 }
 
@@ -39,8 +39,8 @@ void BlomePresetManager::loadPresetForXml(juce::XmlElement inElement)
         const juce::String name = mCurrentPresetXml->getAttributeName(i);
         const float value = mCurrentPresetXml->getDoubleAttribute(name);
         
-        for(int j = 0; j < mProcessor->getParameters().size(); j++) {
-            if(mProcessor->getParameters()[j]->getName(20) == name) {
+        for(int j = 0; j < numParameters; j++) {
+            if(mProcessor->getParameters()[j]->getName(30) == name) {
                 mProcessor->getParameters()[j]->setValueNotifyingHost(value);
             }
         }
