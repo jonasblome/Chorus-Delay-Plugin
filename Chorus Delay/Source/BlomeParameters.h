@@ -20,7 +20,7 @@ enum BlomeParameter
     kParameter_OutputGain,
     kParameter_ModulationRate,
     kParameter_ModulationDepth,
-    kParameter_TotalNumParameters
+    kParameter_TotalNumParameters,
 };
 
 static juce::String BlomeParameterID [kParameter_TotalNumParameters] =

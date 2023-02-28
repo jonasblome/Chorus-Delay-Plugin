@@ -65,8 +65,8 @@ public:
 
 private:
     // Internal
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void initializeDSP();
-    void initializeParameters();
     
     std::unique_ptr<BlomeGain> mInputGain [2];
     std::unique_ptr<BlomeGain> mOutputGain [2];

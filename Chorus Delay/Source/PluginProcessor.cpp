@@ -21,10 +21,9 @@ ChorusDelayAudioProcessor::ChorusDelayAudioProcessor()
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
                        ),
-        parameters(*this, nullptr)
+        parameters(*this, nullptr, "PARAMETERS", createParameterLayout())
 #endif
 {
-    initializeParameters();
     initializeDSP();
     
     mPresetManager = std::make_unique<BlomePresetManager>(this);
@@ -239,6 +238,19 @@ void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeI
     }
 }
 
+juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::createParameterLayout()
+{
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
+
+    for (int i = 0; i < kParameter_TotalNumParameters; ++i)
+        layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (BlomeParameterID[i],
+                                                                BlomeParameterID[i],
+                                                                juce::NormalisableRange<float>(0.0f, 1.0f),
+                                                                0.5f));
+
+    return layout;
+}
+
 void ChorusDelayAudioProcessor::initializeDSP()
 {
     for(int i = 0; i < 2; i++) {
@@ -246,21 +258,6 @@ void ChorusDelayAudioProcessor::initializeDSP()
         mOutputGain[i] = std::make_unique<BlomeGain>();
         mDelay[i] = std::make_unique<BlomeDelay>();
         mLFO[i] = std::make_unique<BlomeLFO>();
-    }
-}
-
-void ChorusDelayAudioProcessor::initializeParameters()
-{
-    using Parameter = juce::AudioProcessorValueTreeState::Parameter;
-    
-    for(int i = 0; i < kParameter_TotalNumParameters; i++) {
-        parameters.createAndAddParameter(std::make_unique<Parameter> (BlomeParameterID[i],
-                                                           BlomeParameterNames[i],
-                                                           BlomeParameterNames[i],
-                                                           juce::NormalisableRange<float>(0.0f, 1.0f),
-                                                           0.5f,
-                                                           nullptr,
-                                                           nullptr));
     }
 }
 
