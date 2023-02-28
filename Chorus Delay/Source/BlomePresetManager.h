@@ -18,7 +18,7 @@ public:
     BlomePresetManager(juce::AudioProcessor* inProcessor);
     ~BlomePresetManager();
     
-    void getXmlForPreset(juce::XmlElement inElement);
+    void getXmlForPreset(juce::XmlElement* inElement);
     
     void loadPresetForXml(juce::XmlElement inElement);
     

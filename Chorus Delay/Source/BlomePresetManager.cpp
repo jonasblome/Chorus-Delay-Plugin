@@ -20,12 +20,12 @@ BlomePresetManager::~BlomePresetManager()
     
 }
 
-void BlomePresetManager::getXmlForPreset(juce::XmlElement inElement)
+void BlomePresetManager::getXmlForPreset(juce::XmlElement* inElement)
 {
     const int numParameters = mProcessor->getParameters().size();
     
     for(int i = 0; i < numParameters; i++) {
-        inElement.setAttribute(mProcessor->getParameters()[i]->getName(30), mProcessor->getParameters()[i]->getValue());
+        inElement->setAttribute(mProcessor->getParameters()[i]->getName(30), mProcessor->getParameters()[i]->getValue());
     }
 }
 

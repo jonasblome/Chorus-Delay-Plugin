@@ -210,11 +210,10 @@ void ChorusDelayAudioProcessor::getStateInformation (juce::MemoryBlock& destData
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
-    
     juce::XmlElement preset("Blome_StateInfo");
     juce::XmlElement* presetBody = new juce::XmlElement("Blome_Preset");
     
-    mPresetManager->getXmlForPreset(*presetBody);
+    mPresetManager->getXmlForPreset(presetBody);
     
     preset.addChildElement(presetBody);
     copyXmlToBinary(preset, destData);
@@ -224,7 +223,6 @@ void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeI
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-    
     juce::XmlElement xmlState = *getXmlFromBinary(data, sizeInBytes);
     juce::XmlElement* xmlStatePtr = &xmlState;
     
@@ -243,7 +241,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::c
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
     for (int i = 0; i < kParameter_TotalNumParameters; ++i)
-        layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (BlomeParameterID[i],
+        layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (
+                                                                juce::ParameterID(BlomeParameterID[i], 1),
                                                                 BlomeParameterID[i],
                                                                 juce::NormalisableRange<float>(0.0f, 1.0f),
                                                                 0.5f));
