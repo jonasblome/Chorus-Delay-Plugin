@@ -10,11 +10,29 @@
 
 #include "BlomePresetManager.h"
 
+#if JUCE_WINDOWS
+    static const juce::String directorySeparator = "\\";
+#elif JUCE_MAC
+    static const juce::String directorySeparator = "/";
+#endif
+
 BlomePresetManager::BlomePresetManager(juce::AudioProcessor* inProcessor)
-:   mProcessor(inProcessor)
+:   mCurrentPresetIsSaved(false),
+    mCurrentPresetName("Untitled"),
+    mProcessor(inProcessor)
 {
+    const juce::String pluginName = (juce::String) mProcessor->getName();
     
+    mPresetDirectory =
+    (juce::File::getSpecialLocation(juce::File::userDesktopDirectory)).getFullPathName()+pluginName;
+    
+    if(!juce::File(mPresetDirectory).exists()) {
+        juce::File(mPresetDirectory).createDirectory();
+    }
+    
+    storeLocalPreset();
 }
+
 BlomePresetManager::~BlomePresetManager()
 {
     
@@ -44,5 +62,100 @@ void BlomePresetManager::loadPresetForXml(juce::XmlElement inElement)
                 mProcessor->getParameters()[j]->setValueNotifyingHost(value);
             }
         }
+    }
+}
+
+int BlomePresetManager::getNumberOfPresets()
+{
+    return mLocalPresets.size();
+}
+
+juce::String BlomePresetManager::getPresetName(int inPresetIndex)
+{
+    return mLocalPresets[inPresetIndex].getFileNameWithoutExtension();
+}
+
+void BlomePresetManager::createNewPreset()
+{
+    const int numParameters = mProcessor->getParameters().size();
+    
+    for(int i = 0; i < numParameters; i++) {
+        mProcessor->getParameters()[i]->setValueNotifyingHost(mProcessor->getParameters()[i]->getDefaultValue());
+    }
+    
+    mCurrentPresetIsSaved = false;
+    mCurrentPresetName = "Untitled";
+}
+
+void BlomePresetManager::savePreset()
+{
+    juce::MemoryBlock destinationData;
+    mProcessor->getStateInformation(destinationData);
+    
+    mCurrentlyLoadedPreset.deleteFile();
+    
+    mCurrentlyLoadedPreset.appendData(destinationData.getData(),
+                                      destinationData.getSize());
+    
+    mCurrentPresetIsSaved = true;
+}
+
+void BlomePresetManager::saveAsPreset(juce::String inPresetName)
+{
+    juce::File presetFile = juce::File(mPresetDirectory + directorySeparator + inPresetName);
+    
+    if(!presetFile.exists()) {
+        presetFile.create();
+    }
+    else {
+        presetFile.deleteFile();
+    }
+    
+    juce::MemoryBlock destinationData;
+    mProcessor->getStateInformation(destinationData);
+    
+    presetFile.appendData(destinationData.getData(),
+                          destinationData.getSize());
+    
+    mCurrentPresetIsSaved = true;
+    mCurrentPresetName = inPresetName;
+    
+    storeLocalPreset();
+}
+
+void BlomePresetManager::loadPreset(int inPresetIndex)
+{
+    mCurrentlyLoadedPreset = mLocalPresets[inPresetIndex];
+    
+    juce::MemoryBlock presetBinary;
+    
+    if(mCurrentlyLoadedPreset.loadFileAsData(presetBinary)) {
+        mCurrentPresetIsSaved = true;
+        mCurrentPresetName = getPresetName(inPresetIndex);
+        mProcessor->setStateInformation(presetBinary.getData(), (int) presetBinary.getSize());
+    }
+}
+
+bool BlomePresetManager::getIsCurrentPresetSaved()
+{
+    return mCurrentPresetIsSaved;
+}
+
+juce::String BlomePresetManager::getCurrentPresetName()
+{
+    return mCurrentPresetName;
+}
+
+void BlomePresetManager::storeLocalPreset()
+{
+    mLocalPresets.clear();
+    
+    for(juce::RangedDirectoryIterator rdi (juce::File(mPresetDirectory),
+                                    false,
+                                    "*"+(juce::String)PRESET_FILE_EXTENSION,
+                                    juce::File::TypesOfFileToFind::findFiles); ;)
+    {
+        juce::File preset = rdi->getFile();
+        mLocalPresets.add(preset);
     }
 }

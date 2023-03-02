@@ -62,6 +62,11 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     juce::AudioProcessorValueTreeState parameters;
+    
+    BlomePresetManager* getPresetManager()
+    {
+        return &*mPresetManager;
+    }
 
 private:
     // Internal
