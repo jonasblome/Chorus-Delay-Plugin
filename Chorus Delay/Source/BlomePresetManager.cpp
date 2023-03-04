@@ -150,12 +150,12 @@ void BlomePresetManager::storeLocalPreset()
 {
     mLocalPresets.clear();
     
-    for(juce::RangedDirectoryIterator rdi (juce::File(mPresetDirectory),
-                                    false,
-                                    "*"+(juce::String)PRESET_FILE_EXTENSION,
-                                    juce::File::TypesOfFileToFind::findFiles); ;)
+    for(juce::DirectoryEntry entry : juce::RangedDirectoryIterator(juce::File(mPresetDirectory),
+                                          false,
+                                          "*" + (juce::String)PRESET_FILE_EXTENSION,
+                                          juce::File::TypesOfFileToFind::findFiles))
     {
-        juce::File preset = rdi->getFile();
+        juce::File preset = entry.getFile();
         mLocalPresets.add(preset);
     }
 }

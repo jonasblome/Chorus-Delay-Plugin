@@ -13,7 +13,9 @@
 #include "BlomePanelBase.h"
 
 class BlomeTopPanel
-:   public BlomePanelBase
+:   public BlomePanelBase,
+    public juce::Button::Listener,
+    public juce::ComboBox::Listener
 {
 public:
     BlomeTopPanel(ChorusDelayAudioProcessor* inProcessor);
@@ -21,6 +23,17 @@ public:
     
     void paint(juce::Graphics& g) override;
     
+    void buttonClicked (juce::Button*) override;
+    
+    void comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged) override;
+    
 private:
+    void displaySaveAsPopup();
+    
+    void updatePresetComboBox();
+    
+    std::unique_ptr<juce::ComboBox> mPresetDisplay;
+    
+    std::unique_ptr<juce::TextButton> mNewPreset, mSavePreset, mSaveAsPreset;
     
 };
