@@ -55,6 +55,8 @@
             file="Source/BlomeHelperFunctions.h"/>
       <FILE id="Ox3hPw" name="BlomeInterfaceDefines.h" compile="0" resource="0"
             file="Source/BlomeInterfaceDefines.h"/>
+      <FILE id="TFYG2i" name="BlomeLookAndFeel.h" compile="0" resource="0"
+            file="Source/BlomeLookAndFeel.h"/>
       <FILE id="jiYkTp" name="BlomeParameters.h" compile="0" resource="0"
             file="Source/BlomeParameters.h"/>
     </GROUP>
@@ -74,6 +76,11 @@
       <FILE id="uHfnDS" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="RtslHJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+    <GROUP id="{586A0335-0BD9-00F7-4546-AFC27CFE5169}" name="Assets">
+      <FILE id="Z9sySe" name="kadenze_bg.png" compile="0" resource="1" file="Assets/kadenze_bg.png"/>
+      <FILE id="OX1wmt" name="kadenze_knob.png" compile="0" resource="1"
+            file="Assets/kadenze_knob.png"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>

@@ -35,7 +35,7 @@ static juce::String BlomeParameterID [kParameter_TotalNumParameters] =
     "ModulationDepth",
 };
 
-static juce::String BlomeParameterNames [kParameter_TotalNumParameters] =
+static juce::String BlomeParameterLabels [kParameter_TotalNumParameters] =
 {
     "Input Gain",
     "Time",

@@ -9,6 +9,7 @@
 */
 
 #include "BlomePanelBase.h"
+#include "BlomeInterfaceDefines.h"
 
 BlomePanelBase::BlomePanelBase(ChorusDelayAudioProcessor* inProcessor)
 :   mProcessor(inProcessor)
@@ -21,11 +22,20 @@ BlomePanelBase::~BlomePanelBase()
     
 }
 
+void BlomePanelBase::mouseEnter(const juce::MouseEvent& event)
+{
+    repaint();
+}
+
+void BlomePanelBase::mouseExit(const juce::MouseEvent& event)
+{
+    repaint();
+}
+
 void BlomePanelBase::paint(juce::Graphics& g)
 {
-    g.setColour(juce::Colours::whitesmoke);
-    g.fillAll();
-    
-    g.setColour(juce::Colours::black);
-    g.drawRect(0, 0, getWidth(), getHeight(), 2);
+    if(isMouseOver()) {
+//        g.setColour(BlomeColour_4);
+//        g.fillAll();
+    }
 }

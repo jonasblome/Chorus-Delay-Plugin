@@ -29,20 +29,24 @@ BlomeFXPanel::~BlomeFXPanel()
 void BlomeFXPanel::paint(juce::Graphics& g)
 {
     BlomePanelBase::paint(g);
-    
+    juce::String label;
+
     switch (mStyle) {
         case kBlomeFXPanelStyle_Delay:
-            g.drawFittedText("DELAY", 0, 0, getWidth(), getHeight() * 0.75, juce::Justification::centred, 1);
+            label = "DELAY";
             break;
         case kBlomeFXPanelStyle_Chorus:
-            g.drawFittedText("CHORUS", 0, 0, getWidth(), getHeight() * 0.75, juce::Justification::centred, 1);
+            label = "CHORUS";
             break;
         default:
         case kBlomeFXPanelStyle_TotalNumStyles:
-            g.drawFittedText("ERROR", 0, 0, getWidth(), getHeight(), juce::Justification::centred, 1);
             jassertfalse;
-            break;
     }
+    
+    g.setColour(BlomeColour_5);
+    g.setFont(font_3);
+    
+    g.drawText(label, 0, 0, getWidth(), 80, juce::Justification::centred);
     
     // Paint labels
     for(int i = 0; i < mSliders.size(); i++) {

@@ -11,6 +11,7 @@
 #pragma once
 
 #include "JuceHeader.h"
+#include "BlomeInterfaceDefines.h"
 
 inline void paintComponentLabel(juce::Graphics& g, juce::Component* inComponent)
 {
@@ -19,9 +20,15 @@ inline void paintComponentLabel(juce::Graphics& g, juce::Component* inComponent)
     const int w = inComponent->getWidth() * 1.5f;
     const int h = 20;
     
-    const juce::String label = inComponent->getName();
-//    const float cornerSize = 3.0f;
+    const float cornerSize = 3.0f;
     
-    g.setColour(juce::Colours::darkgrey);
+    const juce::String label = inComponent->getName();
+    
+    g.setColour(BlomeColour_3);
+    g.fillRoundedRectangle(x, y, w, h, cornerSize);
+    
+    g.setColour(BlomeColour_1);
+    g.setFont(font_1);
+    
     g.drawFittedText(label, x, y, w, h, juce::Justification::centred, 1);
 }

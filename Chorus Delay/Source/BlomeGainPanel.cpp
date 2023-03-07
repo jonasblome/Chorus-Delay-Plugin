@@ -38,7 +38,7 @@ void BlomeGainPanel::setParameterID(int inParameterID)
     const int slider_size = 54;
     
     mSlider->setBounds(getWidth() * 0.5 - slider_size * 0.5,
-                       getHeight() * 0.5 - slider_size * 0.5,
+                       getHeight() * 0.25 - slider_size * 0.5,
                        slider_size,
                        slider_size);
     addAndMakeVisible(mSlider.get());
