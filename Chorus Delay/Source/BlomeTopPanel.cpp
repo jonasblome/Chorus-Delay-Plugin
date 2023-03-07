@@ -70,6 +70,8 @@ void BlomeTopPanel::buttonClicked (juce::Button* b)
     
     if(b == &*mNewPreset) {
         presetManager->createNewPreset();
+        
+        updatePresetComboBox();
     }
     else if (b == &*mSavePreset) {
         presetManager->savePreset();
@@ -81,7 +83,12 @@ void BlomeTopPanel::buttonClicked (juce::Button* b)
 
 void BlomeTopPanel::comboBoxChanged (juce::ComboBox* comboBoxThatHasChanged)
 {
-    
+    if(comboBoxThatHasChanged == &*mPresetDisplay) {
+        BlomePresetManager* presetManager = mProcessor->getPresetManager();
+        
+        const int index = mPresetDisplay->getSelectedItemIndex();
+        presetManager->loadPreset(index);
+    }
 }
 
 void BlomeTopPanel::displaySaveAsPopup()
@@ -90,17 +97,23 @@ void BlomeTopPanel::displaySaveAsPopup()
     
     juce::String currentPresetName = presetManager->getCurrentPresetName();
     
-    juce::AlertWindow window("Save As", "Please enter a name for your Preset", juce::AlertWindow::NoIcon);
+    juce::AlertWindow* window = new juce::AlertWindow("Save As", "Please enter a name for your Preset", juce::MessageBoxIconType::NoIcon);
     
-    window.centreAroundComponent(this, getWidth(), getHeight());
-    window.addTextEditor("presetName", currentPresetName, "preset name: ");
-    window.addButton("Confirm", 1);
-    window.addButton("Cancel", 0);
+    window->centreAroundComponent(this, getWidth(), getHeight());
+    window->addTextEditor("presetName", currentPresetName, "Preset name: ");
+    window->addButton("Confirm", 1);
+    window->addButton("Cancel", 0);
+    window->setAlwaysOnTop(true);
     
-    if(window.showAsync(<#const MessageBoxOptions &options#>, <#ModalComponentManager::Callback *callback#>)) {
-        juce::String presetName = window.getTextEditor("presetName")->getText();
-        presetManager->saveAsPreset(presetName);
-    }
+    window->enterModalState(true, juce::ModalCallbackFunction::create([this, window, presetManager] (int result) {
+        if (result == 1)
+        {
+            juce::String presetName = window->getTextEditor("presetName")->getText();
+            presetManager->saveAsPreset(presetName);
+
+            updatePresetComboBox();
+        }
+    }), true);
 }
 
 void BlomeTopPanel::updatePresetComboBox()
@@ -109,10 +122,12 @@ void BlomeTopPanel::updatePresetComboBox()
     juce::String presetName = presetManager->getCurrentPresetName();
     
     mPresetDisplay->clear(juce::dontSendNotification);
-    
+        
     const int numPresets = presetManager->getNumberOfPresets();
     
     for(int i = 0; i < numPresets; i++) {
         mPresetDisplay->addItem(presetManager->getPresetName(i), (i + 1));
     }
+    
+    mPresetDisplay->setText(presetManager->getCurrentPresetName());
 }
