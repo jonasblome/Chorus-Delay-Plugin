@@ -257,7 +257,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::c
     for (int i = 0; i < kParameter_TotalNumParameters; ++i)
         layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (
                                                                 juce::ParameterID(BlomeParameterID[i], 1),
-                                                                BlomeParameterLabels[i],
+                                                                BlomeParameterID[i],
                                                                 juce::NormalisableRange<float>(0.0f, 1.0f),
                                                                 0.5f));
 

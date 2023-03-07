@@ -11,8 +11,9 @@
 #include "BlomeParameterSlider.h"
 
 BlomeParameterSlider::BlomeParameterSlider(juce::AudioProcessorValueTreeState& stateToControl,
-                     const juce::String& parameterID)
-:   juce::Slider(parameterID)
+                                           const juce::String& parameterID,
+                                           const juce::String& parameterLabel)
+:   juce::Slider(parameterLabel)
 {
     setSliderStyle(SliderStyle::RotaryHorizontalVerticalDrag);
     setTextBoxStyle(Slider::TextEntryBoxPosition::TextBoxBelow, false, 0, 0);

@@ -42,7 +42,7 @@ void BlomeGainPanel::paint(juce::Graphics& g)
 
 void BlomeGainPanel::setParameterID(int inParameterID)
 {
-    mSlider = std::make_unique<BlomeParameterSlider>(mProcessor->parameters, BlomeParameterID[inParameterID]);
+    mSlider = std::make_unique<BlomeParameterSlider>(mProcessor->parameters, BlomeParameterID[inParameterID], BlomeParameterLabels[inParameterID]);
     const int slider_size = 54;
     
     mSlider->setBounds(getWidth() * 0.5 - slider_size * 0.5,

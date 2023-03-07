@@ -17,7 +17,8 @@ class BlomeParameterSlider
 {
 public:
     BlomeParameterSlider(juce::AudioProcessorValueTreeState& stateToControl,
-                         const juce::String& parameterID);
+                         const juce::String& parameterID,
+                         const juce::String& parameterLabel);
     ~BlomeParameterSlider();
     
 private:

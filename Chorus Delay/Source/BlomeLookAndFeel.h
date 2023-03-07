@@ -52,9 +52,9 @@ public:
         if(shouldDrawButtonAsDown) {
             fillColour = BlomeColour_6;
         } else if(shouldDrawButtonAsHighlighted) {
-            fillColour = BlomeColour_3;
-        } else {
             fillColour = BlomeColour_5;
+        } else {
+            fillColour = BlomeColour_3;
         }
         
         const float cornerSize = 6.0f;

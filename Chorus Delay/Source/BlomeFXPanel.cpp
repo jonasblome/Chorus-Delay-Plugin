@@ -66,38 +66,50 @@ void BlomeFXPanel::setFXPanelStyle(BlomeFXPanelStyle inStyle)
     
     switch (mStyle) {
         case kBlomeFXPanelStyle_Delay: {
-            BlomeParameterSlider* time = new BlomeParameterSlider(mProcessor->parameters, BlomeParameterID[kParameter_DelayTime]);
+            BlomeParameterSlider* time = new BlomeParameterSlider(mProcessor->parameters,
+                                                                  BlomeParameterID[kParameter_DelayTime],
+                                                                  BlomeParameterLabels[kParameter_DelayTime]);
             time->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*time);
             mSliders.add(time);
             x = x + slider_size * 2;
             
-            BlomeParameterSlider* feedback = new BlomeParameterSlider(mProcessor->parameters, BlomeParameterID[kParameter_DelayFeedback]);
+            BlomeParameterSlider* feedback = new BlomeParameterSlider(mProcessor->parameters,
+                                                                      BlomeParameterID[kParameter_DelayFeedback],
+                                                                      BlomeParameterLabels[kParameter_DelayFeedback]);
             feedback->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*feedback);
             mSliders.add(feedback);
             x = x + slider_size * 2;
             
-            BlomeParameterSlider* wetdry = new BlomeParameterSlider(mProcessor->parameters, BlomeParameterID[kParameter_DelayWetDry]);
+            BlomeParameterSlider* wetdry = new BlomeParameterSlider(mProcessor->parameters,
+                                                                    BlomeParameterID[kParameter_DelayWetDry],
+                                                                    BlomeParameterLabels[kParameter_DelayWetDry]);
             wetdry->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*wetdry);
             mSliders.add(wetdry);
             break;
             }
         case kBlomeFXPanelStyle_Chorus: {
-            BlomeParameterSlider* rate = new BlomeParameterSlider(mProcessor->parameters, BlomeParameterID[kParameter_ModulationRate]);
+            BlomeParameterSlider* rate = new BlomeParameterSlider(mProcessor->parameters,
+                                                                  BlomeParameterID[kParameter_ModulationRate],
+                                                                  BlomeParameterLabels[kParameter_ModulationRate]);
             rate->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*rate);
             mSliders.add(rate);
             x = x + slider_size * 2;
             
-            BlomeParameterSlider* depth = new BlomeParameterSlider(mProcessor->parameters, BlomeParameterID[kParameter_ModulationDepth]);
+            BlomeParameterSlider* depth = new BlomeParameterSlider(mProcessor->parameters,
+                                                                   BlomeParameterID[kParameter_ModulationDepth],
+                                                                   BlomeParameterLabels[kParameter_ModulationDepth]);
             depth->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*depth);
             mSliders.add(depth);
             x = x + slider_size * 2;
             
-            BlomeParameterSlider* wetdry = new BlomeParameterSlider(mProcessor->parameters, BlomeParameterID[kParameter_DelayWetDry]);
+            BlomeParameterSlider* wetdry = new BlomeParameterSlider(mProcessor->parameters,
+                                                                    BlomeParameterID[kParameter_DelayWetDry],
+                                                                    BlomeParameterLabels[kParameter_DelayWetDry]);
             wetdry->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*wetdry);
             mSliders.add(wetdry);
