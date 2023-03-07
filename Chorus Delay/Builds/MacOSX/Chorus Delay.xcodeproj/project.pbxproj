@@ -36,6 +36,7 @@
 		39CDFD524E1AD8625CFEB485 /* DiscRecording.framework */ = {isa = PBXBuildFile; fileRef = 5EBFE11461DD7ABD3DF0B0A6; };
 		3D99E46CECAC7404ADA5D82E /* RecentFilesMenuTemplate.nib */ = {isa = PBXBuildFile; fileRef = CFC4C05ADDAA02E589139289; };
 		45E51FC73E1C2D2ADF798BCA /* AudioToolbox.framework */ = {isa = PBXBuildFile; fileRef = 5791A8693DD2D2E4A01B7ED5; };
+		485B4CBDE9DD00E0965661F9 /* BlomeVUMeter.cpp */ = {isa = PBXBuildFile; fileRef = 7442E4EF1B2A23EF5BE31160; };
 		4A8D8F859C822413D7A0103F /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXBuildFile; fileRef = 5647AF3C34F138D501ED4D88; };
 		4BDA820165AFAF345A73B8B6 /* BlomeCenterPanelMenuBar.cpp */ = {isa = PBXBuildFile; fileRef = D57FE3D7F19EF78A1DB8541B; };
 		4F255066F5AB01753FBE5134 /* PluginEditor.cpp */ = {isa = PBXBuildFile; fileRef = 28A07A94D6A013AB97D878BE; };
@@ -122,9 +123,11 @@
 		6E9F3E72F68CDE20D5CBC3E9 /* include_juce_audio_plugin_client_VST_utils.mm */ /* include_juce_audio_plugin_client_VST_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_VST_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm; sourceTree = SOURCE_ROOT; };
 		720343209CA9AC768FABF72F /* BinaryData.h */ /* BinaryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BinaryData.h; path = ../../JuceLibraryCode/BinaryData.h; sourceTree = SOURCE_ROOT; };
 		72408C38AE6D911375FFC03B /* juce_audio_utils */ /* juce_audio_utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_utils; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_utils; sourceTree = "<absolute>"; };
+		7442E4EF1B2A23EF5BE31160 /* BlomeVUMeter.cpp */ /* BlomeVUMeter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeVUMeter.cpp; path = ../../Source/BlomeVUMeter.cpp; sourceTree = SOURCE_ROOT; };
 		74AFA771832BB0F7321847EE /* BlomeFXPanel.h */ /* BlomeFXPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeFXPanel.h; path = ../../Source/BlomeFXPanel.h; sourceTree = SOURCE_ROOT; };
 		796A854F20B44541D1CF0AE2 /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_devices; sourceTree = "<absolute>"; };
 		7B718426FA8B71C7DFAF495B /* Foundation.framework */ /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7BCBCE80C65F20956AD25B4B /* BlomeVUMeter.h */ /* BlomeVUMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeVUMeter.h; path = ../../Source/BlomeVUMeter.h; sourceTree = SOURCE_ROOT; };
 		7F4339EACDC733D0E042205C /* BlomeFXPanel.cpp */ /* BlomeFXPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeFXPanel.cpp; path = ../../Source/BlomeFXPanel.cpp; sourceTree = SOURCE_ROOT; };
 		8036598BC810E430572354D9 /* juce_graphics */ /* juce_graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_graphics; path = /Users/jonasblome/Documents/JUCE/modules/juce_graphics; sourceTree = "<absolute>"; };
 		82EB4AA16E19FC5765427F29 /* include_juce_audio_plugin_client_AU_2.mm */ /* include_juce_audio_plugin_client_AU_2.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AU_2.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AU_2.mm; sourceTree = SOURCE_ROOT; };
@@ -392,9 +395,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CA153D12615FCF119AE03E4A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7442E4EF1B2A23EF5BE31160,
+				7BCBCE80C65F20956AD25B4B,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		CF3EFDBAD5274464075A352C /* Chorus Delay */ = {
 			isa = PBXGroup;
 			children = (
+				CA153D12615FCF119AE03E4A,
 				44A48B4B18C1910E251C75F4,
 				9134F5DE98A2C82C8366484D,
 				73CDA564614D2A01C9626821,
@@ -691,6 +704,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485B4CBDE9DD00E0965661F9,
 				5CE2DE7CA8D105ECA7FC7872,
 				F8A4E5BDC28A8029E0CBB4B2,
 				2168D95038DAC973B65216ED,

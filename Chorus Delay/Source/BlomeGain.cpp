@@ -10,13 +10,16 @@
 
 #include "BlomeGain.h"
 
-#include "JuceHeader.h"
+#include "BlomeAudioHelper.h"
 
 BlomeGain::BlomeGain()
+:   mOutputSmoothed(0)
 {
+    
 }
 BlomeGain::~BlomeGain()
 {
+    
 }
 
 void BlomeGain::process(float* inAudio,
@@ -31,4 +34,12 @@ void BlomeGain::process(float* inAudio,
     for(int i = 0; i < inNumSamplesToRender; i++) {
         outAudio[i] = inAudio[i] * gainMapped;
     }
+    
+    float absValue = fabs(outAudio[0]);
+    mOutputSmoothed = kMeterSmoothingCoeff * (mOutputSmoothed - absValue) + absValue;
+}
+
+float BlomeGain::getMeterLevel()
+{
+    return mOutputSmoothed;
 }

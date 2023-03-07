@@ -20,5 +20,9 @@ public:
                  float inGain,
                  float* outAudio,
                  int inNumSamplesToRender);
+    
+    float getMeterLevel();
+    
 private:
+    float mOutputSmoothed;
 };

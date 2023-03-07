@@ -12,6 +12,7 @@
 
 #include "BlomePanelBase.h"
 #include "BlomeParameterSlider.h"
+#include "BlomeVUMeter.h"
 
 class BlomeGainPanel
 :   public BlomePanelBase
@@ -26,5 +27,6 @@ public:
     
 private:
     std::unique_ptr<BlomeParameterSlider> mSlider;
+    std::unique_ptr<BlomeVUMeter> mVUMeter;
     
 };

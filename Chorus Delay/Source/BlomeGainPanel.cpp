@@ -16,6 +16,14 @@ BlomeGainPanel::BlomeGainPanel(ChorusDelayAudioProcessor* inProcessor)
 :   BlomePanelBase(inProcessor)
 {
     setSize(GAIN_PANEL_WIDTH, GAIN_PANEL_HEIGHT);
+    
+    const int meter_w = 64;
+    mVUMeter = std::make_unique<BlomeVUMeter>(inProcessor);
+    mVUMeter->setBounds(getWidth() * 0.5 - (meter_w * 0.5),
+                        (getHeight() * 0.55) - (meter_w * 0.5),
+                        meter_w,
+                        getHeight() * 0.45);
+    addAndMakeVisible(*mVUMeter);
 }
 
 BlomeGainPanel::~BlomeGainPanel()
@@ -38,8 +46,10 @@ void BlomeGainPanel::setParameterID(int inParameterID)
     const int slider_size = 54;
     
     mSlider->setBounds(getWidth() * 0.5 - slider_size * 0.5,
-                       getHeight() * 0.25 - slider_size * 0.5,
+                       getHeight() * 0.25 - slider_size * 0.5 - 10,
                        slider_size,
                        slider_size);
     addAndMakeVisible(mSlider.get());
+    
+    mVUMeter->setParameterID(inParameterID);
 }
