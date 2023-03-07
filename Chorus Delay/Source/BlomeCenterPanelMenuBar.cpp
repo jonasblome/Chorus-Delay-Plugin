@@ -22,7 +22,7 @@ BlomeCenterPanelMenuBar::BlomeCenterPanelMenuBar(ChorusDelayAudioProcessor* inPr
     mFxTypeComboBox->setBounds(getWidth() - width, 0, width, getHeight());
     mFxTypeComboBox->addItem("DELAY", 1);
     mFxTypeComboBox->addItem("CHORUS", 2);
-    mFxTypeComboBox->setSelectedItemIndex((int)mProcessor->parameters.getParameter(BlomeParameterID[kParameter_DelayType])->getValue(), juce::dontSendNotification);
+    mFxTypeComboBox->setSelectedItemIndex((int)*mProcessor->parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayType]), juce::dontSendNotification);
     addAndMakeVisible(mFxTypeComboBox.get());
 }
 

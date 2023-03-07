@@ -46,7 +46,7 @@ void BlomeDelay::process(float* inAudio,
 {
     const float wet = inWetDry;
     const float dry = 1.0f - wet;
-    const float feedbackMapped = juce::jmap<float>(inFeedback, 0.0f, 1.0f, 0.0f, 0.95f);
+    const float feedbackMapped = juce::jmap<float>(inFeedback, 0.0f, 1.0f, 0.0f, 1.2f);
     
     for(int i = 0; i< inNumSamplesToRender; i++) {
         if((int)inType == kBlomeDelayType_Delay) {
@@ -60,7 +60,7 @@ void BlomeDelay::process(float* inAudio,
         const double delayTimeInSamples = mTimeSmoothed * mSampleRate;
         const double sample = getInterpolatedSample(delayTimeInSamples);
         
-        mBuffer[mDelayIndex] = inAudio[i] + (mFeedbackSample * feedbackMapped);
+        mBuffer[mDelayIndex] = tanh_clip(inAudio[i] + (mFeedbackSample * feedbackMapped));
         
         mFeedbackSample = sample;
         

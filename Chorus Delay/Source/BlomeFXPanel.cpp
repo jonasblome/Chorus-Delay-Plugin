@@ -17,7 +17,7 @@ BlomeFXPanel::BlomeFXPanel(ChorusDelayAudioProcessor* inProcessor)
 {
     setSize(FX_PANEL_WIDTH, FX_PANEL_HEIGHT);
     
-    const int currentStyle = (int)mProcessor->parameters.getParameter(BlomeParameterID[kParameter_DelayType])->getValue();
+    const int currentStyle = (int)*mProcessor->parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayType]);
     setFXPanelStyle((BlomeFXPanelStyle)currentStyle);
 }
 

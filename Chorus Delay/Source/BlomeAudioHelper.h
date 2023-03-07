@@ -33,6 +33,11 @@ inline float blome_linear_interp(float v0, float v1, float t)
     return (1 - t) * v0 + t * v1;
 }
 
+inline double tanh_clip(double x)
+{
+    return x * (27 + x * x) / (27 + 9 * x * x);
+}
+
 inline float blome_denormalize(float inValue)
 {
     float absValue = fabs(inValue);

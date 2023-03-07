@@ -21,7 +21,7 @@ ChorusDelayAudioProcessor::ChorusDelayAudioProcessor()
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
                        ),
-        parameters(*this, nullptr, "PARAMETERS", createParameterLayout())
+        parameters(*this, nullptr, juce::Identifier("PARAMETERS"), createParameterLayout())
 #endif
 {
     initializeDSP();
@@ -167,27 +167,27 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         auto* channelData = buffer.getWritePointer(channel);
 
         mInputGain[channel]->process(channelData,
-                                parameters.getParameter(BlomeParameterID[kParameter_InputGain])->getValue(),
+                                *parameters.getRawParameterValue(BlomeParameterID[kParameter_InputGain]),
                                 channelData,
                                 buffer.getNumSamples());
         
-        float rate = (channel == 0) ? 0: parameters.getParameter(BlomeParameterID[kParameter_ModulationRate])->getValue();
+        float rate = (channel == 0) ? 0.0f : (float)*parameters.getRawParameterValue(BlomeParameterID[kParameter_ModulationRate]);
         
         mLFO[channel]->process(rate,
-                               parameters.getParameter(BlomeParameterID[kParameter_ModulationDepth])->getValue(),
+                               *parameters.getRawParameterValue(BlomeParameterID[kParameter_ModulationDepth]),
                                buffer.getNumSamples());
         
         mDelay[channel]->process(channelData,
-                                 parameters.getParameter(BlomeParameterID[kParameter_DelayTime])->getValue(),
-                                 parameters.getParameter(BlomeParameterID[kParameter_DelayFeedback])->getValue(),
-                                 parameters.getParameter(BlomeParameterID[kParameter_DelayWetDry])->getValue(),
-                                 parameters.getParameter(BlomeParameterID[kParameter_DelayType])->getValue(),
+                                 *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayTime]),
+                                 *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayFeedback]),
+                                 *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayWetDry]),
+                                 *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayType]),
                                  mLFO[channel]->getBuffer(),
                                  channelData,
                                  buffer.getNumSamples());
         
         mOutputGain[channel]->process(channelData,
-                                      parameters.getParameter(BlomeParameterID[kParameter_OutputGain])->getValue(),
+                                      *parameters.getRawParameterValue(BlomeParameterID[kParameter_OutputGain]),
                                       channelData,
                                       buffer.getNumSamples());
     }
@@ -257,7 +257,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::c
     for (int i = 0; i < kParameter_TotalNumParameters; ++i)
         layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (
                                                                 juce::ParameterID(BlomeParameterID[i], 1),
-                                                                BlomeParameterID[i],
+                                                                BlomeParameterLabels[i],
                                                                 juce::NormalisableRange<float>(0.0f, 1.0f),
                                                                 0.5f));
 
