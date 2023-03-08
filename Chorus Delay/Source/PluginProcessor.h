@@ -13,6 +13,7 @@
 #include "BlomeGain.h"
 #include "BlomeDelay.h"
 #include "BlomeLFO.h"
+#include "BlomeFilter.h"
 #include "BlomePresetManager.h"
 
 //==============================================================================
@@ -80,6 +81,7 @@ private:
     std::unique_ptr<BlomeGain> mOutputGain [2];
     std::unique_ptr<BlomeDelay> mDelay [2];
     std::unique_ptr<BlomeLFO> mLFO [2];
+    std::unique_ptr<BlomeFilter> mFilter [2];
     
     std::unique_ptr<BlomePresetManager> mPresetManager;
     

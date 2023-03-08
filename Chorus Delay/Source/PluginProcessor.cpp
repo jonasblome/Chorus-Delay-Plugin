@@ -101,6 +101,8 @@ void ChorusDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
     for(int i = 0; i < 2; i++) {
         mDelay[i]->setSampleRate(sampleRate);
         mLFO[i]->setSampleRate(sampleRate);
+        mFilter[i]->setSampleRate(sampleRate);
+        mFilter[i]->prepareFilter(2000.0f, kBlomeFilterType_Lowpass, samplesPerBlock);
     }
 }
 
@@ -111,6 +113,7 @@ void ChorusDelayAudioProcessor::releaseResources()
     for(int i = 0; i < 2; i++) {
         mDelay[i]->reset();
         mLFO[i]->reset();
+        mFilter[i]->reset();
     }
 }
 
@@ -170,6 +173,11 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
                                 *parameters.getRawParameterValue(BlomeParameterID[kParameter_InputGain]),
                                 channelData,
                                 buffer.getNumSamples());
+        
+        mFilter[channel]->process(channelData,
+                                  1.0f,
+                                  channelData,
+                                  buffer.getNumSamples());
         
         float rate = (channel == 0) ? 0.0f : (float)*parameters.getRawParameterValue(BlomeParameterID[kParameter_ModulationRate]);
         
@@ -271,6 +279,7 @@ void ChorusDelayAudioProcessor::initializeDSP()
         mOutputGain[i] = std::make_unique<BlomeGain>();
         mDelay[i] = std::make_unique<BlomeDelay>();
         mLFO[i] = std::make_unique<BlomeLFO>();
+        mFilter[i] = std::make_unique<BlomeFilter>();
     }
 }
 
