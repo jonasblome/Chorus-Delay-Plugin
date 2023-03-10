@@ -61,7 +61,7 @@ void BlomeFXPanel::setFXPanelStyle(BlomeFXPanelStyle inStyle)
     mSliders.clear();
     
     const int slider_size = 56;
-    int x = 130;
+    int x = 74;
     int y = getHeight() * 0.5 - slider_size * 0.5;
     
     switch (mStyle) {
@@ -88,6 +88,16 @@ void BlomeFXPanel::setFXPanelStyle(BlomeFXPanelStyle inStyle)
             wetdry->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*wetdry);
             mSliders.add(wetdry);
+            
+            BlomeParameterSlider* cutoff = new BlomeParameterSlider(mProcessor->parameters,
+                                                                   BlomeParameterID[kParameter_FilterCutoff],
+                                                                   BlomeParameterLabels[kParameter_FilterCutoff]);
+            x = x + slider_size * 2;
+            
+            cutoff->setBounds(x, y, slider_size, slider_size);
+            cutoff->addListener(this);
+            addAndMakeVisible(*cutoff);
+            mSliders.add(cutoff);
             break;
             }
         case kBlomeFXPanelStyle_Chorus: {
@@ -113,6 +123,16 @@ void BlomeFXPanel::setFXPanelStyle(BlomeFXPanelStyle inStyle)
             wetdry->setBounds(x, y, slider_size, slider_size);
             addAndMakeVisible(*wetdry);
             mSliders.add(wetdry);
+            
+            BlomeParameterSlider* cutoff = new BlomeParameterSlider(mProcessor->parameters,
+                                                                   BlomeParameterID[kParameter_FilterCutoff],
+                                                                   BlomeParameterLabels[kParameter_FilterCutoff]);
+            x = x + slider_size * 2;
+            
+            cutoff->setBounds(x, y, slider_size, slider_size);
+            cutoff->addListener(this);
+            addAndMakeVisible(*cutoff);
+            mSliders.add(cutoff);
             break;
         }
         default:
@@ -130,4 +150,11 @@ void BlomeFXPanel::comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged)
     BlomeFXPanelStyle style = (BlomeFXPanelStyle)comboBoxThatHasChanged->getSelectedItemIndex();
     
     setFXPanelStyle(style);
+}
+
+void BlomeFXPanel::sliderValueChanged (juce::Slider* slider)
+{
+    if(slider == mSliders.getUnchecked(3)){
+        mProcessor->updateFilter(slider->getValue());
+    }
 }

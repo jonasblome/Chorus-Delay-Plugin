@@ -22,7 +22,8 @@ enum BlomeFXPanelStyle
 
 class BlomeFXPanel
 :   public BlomePanelBase,
-    public juce::ComboBox::Listener
+    public juce::ComboBox::Listener,
+    public juce::Slider::Listener
 {
 public:
     BlomeFXPanel(ChorusDelayAudioProcessor* inProcessor);
@@ -34,8 +35,9 @@ public:
     
     void comboBoxChanged(juce::ComboBox* comboBoxThatHasChanged) override;
     
+    void sliderValueChanged(juce::Slider* slider) override;
+    
 private:
     BlomeFXPanelStyle mStyle;
     juce::OwnedArray<BlomeParameterSlider> mSliders;
-    
 };

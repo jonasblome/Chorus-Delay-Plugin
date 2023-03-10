@@ -71,6 +71,8 @@ public:
     {
         return &*mPresetManager;
     }
+    
+    void updateFilter(float inCutoffFreq);
 
 private:
     // Internal

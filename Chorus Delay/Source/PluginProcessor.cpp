@@ -98,11 +98,11 @@ void ChorusDelayAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void ChorusDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    for(int i = 0; i < 2; i++) {
-        mDelay[i]->setSampleRate(sampleRate);
-        mLFO[i]->setSampleRate(sampleRate);
-        mFilter[i]->setSampleRate(sampleRate);
-        mFilter[i]->prepareFilter(2000.0f, kBlomeFilterType_Lowpass, samplesPerBlock);
+    for(int c = 0; c < 2; c++) {
+        mDelay[c]->setSampleRate(sampleRate);
+        mLFO[c]->setSampleRate(sampleRate);
+        mFilter[c]->setSampleRate(sampleRate);
+        mFilter[c]->prepareFilter(*parameters.getRawParameterValue(BlomeParameterID[kParameter_FilterCutoff]), kBlomeFilterType_Lowpass, samplesPerBlock);
     }
 }
 
@@ -262,14 +262,21 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::c
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
-    for (int i = 0; i < kParameter_TotalNumParameters; ++i)
+    for (int p = 0; p < kParameter_TotalNumParameters; ++p)
         layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (
-                                                                juce::ParameterID(BlomeParameterID[i], 1),
-                                                                BlomeParameterLabels[i],
+                                                                juce::ParameterID(BlomeParameterID[p], 1),
+                                                                BlomeParameterLabels[p],
                                                                 juce::NormalisableRange<float>(0.0f, 1.0f),
                                                                 0.5f));
 
     return layout;
+}
+
+void ChorusDelayAudioProcessor::updateFilter(float inCutoffFreq)
+{
+    for(int c = 0; c < getTotalNumInputChannels(); c++) {
+        mFilter[c]->prepareFilter(inCutoffFreq, kBlomeFilterType_Lowpass, getBlockSize());
+    }
 }
 
 void ChorusDelayAudioProcessor::initializeDSP()

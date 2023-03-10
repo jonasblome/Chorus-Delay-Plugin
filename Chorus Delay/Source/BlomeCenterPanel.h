@@ -24,5 +24,4 @@ public:
 private:
     std::unique_ptr<BlomeCenterPanelMenuBar> mMenuBar;
     std::unique_ptr<BlomeFXPanel> mFXPanel;
-    
 };

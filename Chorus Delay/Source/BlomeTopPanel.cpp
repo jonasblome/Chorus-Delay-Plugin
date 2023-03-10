@@ -52,6 +52,7 @@ BlomeTopPanel::BlomeTopPanel(ChorusDelayAudioProcessor* inProcessor)
     
     updatePresetComboBox();
 }
+
 BlomeTopPanel::~BlomeTopPanel()
 {
     
@@ -115,7 +116,7 @@ void BlomeTopPanel::displaySaveAsPopup()
         {
             juce::String presetName = window->getTextEditor("presetName")->getText();
             presetManager->saveAsPreset(presetName);
-
+            
             updatePresetComboBox();
         }
     }), true);

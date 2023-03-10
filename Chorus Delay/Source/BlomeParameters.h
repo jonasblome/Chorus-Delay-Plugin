@@ -20,6 +20,7 @@ enum BlomeParameter
     kParameter_OutputGain,
     kParameter_ModulationRate,
     kParameter_ModulationDepth,
+    kParameter_FilterCutoff,
     kParameter_TotalNumParameters,
 };
 
@@ -33,6 +34,7 @@ static juce::String BlomeParameterID [kParameter_TotalNumParameters] =
     "OutputGain",
     "ModulationRate",
     "ModulationDepth",
+    "FilterCutoff",
 };
 
 static juce::String BlomeParameterLabels [kParameter_TotalNumParameters] =
@@ -45,4 +47,5 @@ static juce::String BlomeParameterLabels [kParameter_TotalNumParameters] =
     "Output Gain",
     "Modulation Rate",
     "Modulation Depth",
+    "Filter Cutoff",
 };
