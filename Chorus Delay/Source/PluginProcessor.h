@@ -75,7 +75,6 @@ public:
     void updateFilter(float inCutoffFreq);
 
 private:
-    // Internal
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void initializeDSP();
     

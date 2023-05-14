@@ -35,6 +35,10 @@ public:
                        BlomeFilterType inType,
                        int inNumSamplesToRender);
     
+    void updateFilter(float cutoffFreq,
+                       BlomeFilterType inType,
+                       int inNumSamplesToRender);
+    
     void process(float* inAudio,
                  float inWetDry,
                  float* outAudio,

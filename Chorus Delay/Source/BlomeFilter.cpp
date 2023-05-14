@@ -39,18 +39,32 @@ void BlomeFilter::prepareFilter(float inCutoffFreq,
 {
     const float cutoffMapped = juce::jmap<float>(inCutoffFreq, 0.0f, 1.0f, 20.0f, 20000.0f);
     
-    juce::dsp::ProcessSpec spec({mSampleRate, (juce::uint32)inNumSamplesToRender, 1});
-    
     if((int)inType == kBlomeFilterType_Lowpass) {
         mFilter.state = juce::dsp::FilterDesign<float>::designFIRLowpassWindowMethod(cutoffMapped,
-                                                                                     spec.sampleRate,
-                                                                                     200,
+                                                                                     mSampleRate,
+                                                                                     50,
                                                                                      juce::dsp::WindowingFunction<float>::blackman);
     }
     
     mFilter.state->normalise();
     
+    juce::dsp::ProcessSpec spec({mSampleRate, (juce::uint32)inNumSamplesToRender, 1});
+    
     mFilter.prepare(spec);
+}
+
+void BlomeFilter::updateFilter(float inCutoffFreq,
+                               BlomeFilterType inType,
+                               int inNumSamplesToRender)
+{
+    const float cutoffMapped = juce::jmap<float>(inCutoffFreq, 0.0f, 1.0f, 20.0f, 20000.0f);
+    
+    if((int)inType == kBlomeFilterType_Lowpass) {
+        *mFilter.state = *juce::dsp::FilterDesign<float>::designFIRLowpassWindowMethod(cutoffMapped,
+                                                                                     mSampleRate,
+                                                                                     50,
+                                                                                     juce::dsp::WindowingFunction<float>::blackman);
+    }
 }
 
 void BlomeFilter::process(float* inAudio,
@@ -67,13 +81,12 @@ void BlomeFilter::process(float* inAudio,
     
     juce::AudioBuffer<float> buffer(&bufferPtr, 1, inNumSamplesToRender);
     juce::AudioSourceChannelInfo channelInfo(buffer);
-    juce::dsp::AudioBlock<float> block(*channelInfo.buffer);
+    juce::dsp::AudioBlock<float> block(*channelInfo.buffer, (size_t) channelInfo.startSample);
     juce::dsp::ProcessContextReplacing<float> context(block);
     
     mFilter.process(context);
     
     for(int i = 0; i < inNumSamplesToRender; i++) {
         outAudio[i] = inAudio[i] * dry + mBuffer[i] * wet;
-        outAudio[i] = mBuffer[i];
     }
 }

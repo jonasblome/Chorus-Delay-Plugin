@@ -175,7 +175,7 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
                                 buffer.getNumSamples());
         
         mFilter[channel]->process(channelData,
-                                  1.0f,
+                                  *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayWetDry]),
                                   channelData,
                                   buffer.getNumSamples());
         
@@ -275,12 +275,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::c
 void ChorusDelayAudioProcessor::updateFilter(float inCutoffFreq)
 {
     for(int c = 0; c < getTotalNumInputChannels(); c++) {
-        mFilter[c]->prepareFilter(inCutoffFreq, kBlomeFilterType_Lowpass, getBlockSize());
+        mFilter[c]->updateFilter(inCutoffFreq, kBlomeFilterType_Lowpass, getBlockSize());
     }
 }
 
 void ChorusDelayAudioProcessor::initializeDSP()
 {
+    
     for(int i = 0; i < 2; i++) {
         mInputGain[i] = std::make_unique<BlomeGain>();
         mOutputGain[i] = std::make_unique<BlomeGain>();
