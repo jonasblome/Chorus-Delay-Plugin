@@ -9,4 +9,4 @@ There are options for time/rate, feedback/depth, wet/dry and a filter option.
 The filter can be switched on and off. It has a cutoff slider and can choose between low/high/bandpass.
 It has a preset management system that can store and load different parameter presets and name them.
 
-There are VU meters for the input and output of the effect and nice looking buttons, fonts and backgrounds.
+There are VU meters for the input and output of the effect and minimalist looking design.
