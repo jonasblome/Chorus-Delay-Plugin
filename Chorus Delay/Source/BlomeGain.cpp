@@ -10,7 +10,7 @@
 
 #include "BlomeGain.h"
 
-#include "BlomeAudioHelper.h"
+#include "BlomeAudioHelpers.h"
 
 BlomeGain::BlomeGain()
 :   mOutputSmoothed(0)

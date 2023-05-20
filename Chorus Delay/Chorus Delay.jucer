@@ -16,6 +16,10 @@
             file="Source/BlomePresetManager.h"/>
     </GROUP>
     <GROUP id="{18F274C9-4327-94CA-5C46-319828AE38AF}" name="Parameter Control">
+      <FILE id="smV1mD" name="BlomeParameterToggleButton.cpp" compile="1"
+            resource="0" file="Source/BlomeParameterToggleButton.cpp"/>
+      <FILE id="kZOdKN" name="BlomeParameterToggleButton.h" compile="0" resource="0"
+            file="Source/BlomeParameterToggleButton.h"/>
       <FILE id="QFe5DN" name="BlomeParameterComboBox.cpp" compile="1" resource="0"
             file="Source/BlomeParameterComboBox.cpp"/>
       <FILE id="jmQDLY" name="BlomeParameterComboBox.h" compile="0" resource="0"
@@ -54,8 +58,8 @@
       <FILE id="zEqXE0" name="BlomeTopPanel.h" compile="0" resource="0" file="Source/BlomeTopPanel.h"/>
     </GROUP>
     <GROUP id="{1B158FDA-A3EA-9305-D30B-980E37E8E732}" name="Helpers">
-      <FILE id="idvGYF" name="BlomeAudioHelper.h" compile="0" resource="0"
-            file="Source/BlomeAudioHelper.h"/>
+      <FILE id="idvGYF" name="BlomeAudioHelpers.h" compile="0" resource="0"
+            file="Source/BlomeAudioHelpers.h"/>
       <FILE id="hvbLWf" name="BlomeHelperFunctions.h" compile="0" resource="0"
             file="Source/BlomeHelperFunctions.h"/>
       <FILE id="Ox3hPw" name="BlomeInterfaceDefines.h" compile="0" resource="0"
@@ -84,11 +88,7 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="RtslHJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <GROUP id="{586A0335-0BD9-00F7-4546-AFC27CFE5169}" name="Assets">
-      <FILE id="Z9sySe" name="kadenze_bg.png" compile="0" resource="1" file="Assets/kadenze_bg.png"/>
-      <FILE id="OX1wmt" name="kadenze_knob.png" compile="0" resource="1"
-            file="Assets/kadenze_knob.png"/>
-    </GROUP>
+    <GROUP id="{586A0335-0BD9-00F7-4546-AFC27CFE5169}" name="Assets"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>

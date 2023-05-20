@@ -73,10 +73,18 @@ public:
     }
     
     void updateFilter(float inCutoffFreq);
+    void toggleFilterActivated();
+    void setFilterType(BlomeFilterType filterType);
 
 private:
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
     void initializeDSP();
+    
+    bool mFilterActivated;
+    
+    BlomeFilterType mFilterType;
+    
+    float mFilteredSignalBuffer [2][maxBufferSize];
     
     std::unique_ptr<BlomeGain> mInputGain [2];
     std::unique_ptr<BlomeGain> mOutputGain [2];

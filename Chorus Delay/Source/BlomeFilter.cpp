@@ -39,14 +39,25 @@ void BlomeFilter::prepareFilter(float inCutoffFreq,
 {
     const float cutoffMapped = juce::jmap<float>(inCutoffFreq, 0.0f, 1.0f, 20.0f, 20000.0f);
     
-    if((int)inType == kBlomeFilterType_Lowpass) {
-        mFilter.state = juce::dsp::FilterDesign<float>::designFIRLowpassWindowMethod(cutoffMapped,
-                                                                                     mSampleRate,
-                                                                                     50,
-                                                                                     juce::dsp::WindowingFunction<float>::blackman);
+    switch (inType) {
+        case kBlomeFilterType_Lowpass:
+            mFilter.state = juce::dsp::IIR::Coefficients<float>::makeLowPass(mSampleRate,
+                                                                             cutoffMapped,
+                                                                             0.72f);
+            break;
+        case kBlomeFilterType_Highpass:
+            mFilter.state = juce::dsp::IIR::Coefficients<float>::makeHighPass(mSampleRate,
+                                                                              cutoffMapped,
+                                                                              0.72f);
+            break;
+        case kBlomeFilterType_Bandpass:
+            mFilter.state = juce::dsp::IIR::Coefficients<float>::makeBandPass(mSampleRate,
+                                                                              cutoffMapped,
+                                                                              0.72f);
+            break;
+        default:
+            break;
     }
-    
-    mFilter.state->normalise();
     
     juce::dsp::ProcessSpec spec({mSampleRate, (juce::uint32)inNumSamplesToRender, 1});
     
@@ -57,24 +68,33 @@ void BlomeFilter::updateFilter(float inCutoffFreq,
                                BlomeFilterType inType,
                                int inNumSamplesToRender)
 {
-    const float cutoffMapped = juce::jmap<float>(inCutoffFreq, 0.0f, 1.0f, 20.0f, 20000.0f);
+    const float cutoffMapped = juce::mapToLog10(inCutoffFreq, 20.0f, 20000.0f);
     
-    if((int)inType == kBlomeFilterType_Lowpass) {
-        *mFilter.state = *juce::dsp::FilterDesign<float>::designFIRLowpassWindowMethod(cutoffMapped,
-                                                                                     mSampleRate,
-                                                                                     50,
-                                                                                     juce::dsp::WindowingFunction<float>::blackman);
+    switch (inType) {
+        case kBlomeFilterType_Lowpass:
+            *mFilter.state = juce::dsp::IIR::ArrayCoefficients<float>::makeLowPass(mSampleRate,
+                                                                                   cutoffMapped,
+                                                                                   0.72f);
+            break;
+        case kBlomeFilterType_Highpass:
+            *mFilter.state = juce::dsp::IIR::ArrayCoefficients<float>::makeHighPass(mSampleRate,
+                                                                                    cutoffMapped,
+                                                                                    0.72f);
+            break;
+        case kBlomeFilterType_Bandpass:
+            *mFilter.state = juce::dsp::IIR::ArrayCoefficients<float>::makeBandPass(mSampleRate,
+                                                                                    cutoffMapped,
+                                                                                    0.72f);
+            break;
+        default:
+            break;
     }
 }
 
 void BlomeFilter::process(float* inAudio,
-                          float inWetDry,
                           float* outAudio,
                           int inNumSamplesToRender)
 {
-    const float wet = inWetDry;
-    const float dry = 1.0f - wet;
-    
     std::memcpy(mBuffer, inAudio, inNumSamplesToRender * sizeof(*inAudio));
     
     float* const bufferPtr = mBuffer;
@@ -87,6 +107,6 @@ void BlomeFilter::process(float* inAudio,
     mFilter.process(context);
     
     for(int i = 0; i < inNumSamplesToRender; i++) {
-        outAudio[i] = inAudio[i] * dry + mBuffer[i] * wet;
+        outAudio[i] = mBuffer[i];
     }
 }

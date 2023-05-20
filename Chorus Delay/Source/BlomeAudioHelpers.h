@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    BlomeAudioHelper.h
+    BlomeAudioHelpers.h
     Created: 8 Feb 2023 11:30:12pm
     Author:  Jonas Blome
 

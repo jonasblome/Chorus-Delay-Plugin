@@ -33,8 +33,6 @@ private:
     
     std::unique_ptr<BlomeMainPanel> mMainPanel;
     std::unique_ptr<BlomeLookAndFeel> mLookAndFeel;
-    
-    juce::Image mBackgroundImage;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ChorusDelayAudioProcessorEditor)
 };

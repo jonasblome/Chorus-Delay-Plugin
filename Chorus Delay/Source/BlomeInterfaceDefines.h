@@ -24,19 +24,36 @@
 #define CENTER_PANEL_HEIGHT             GAIN_PANEL_HEIGHT
 
 #define CENTER_PANEL_MENU_BAR_WIDTH     CENTER_PANEL_WIDTH
-#define CENTER_PANEL_MENU_BAR_HEIGHT    35
+#define CENTER_PANEL_MENU_BAR_HEIGHT    20
 
 #define FX_PANEL_WIDTH                  CENTER_PANEL_WIDTH
 #define FX_PANEL_HEIGHT                 CENTER_PANEL_HEIGHT - CENTER_PANEL_MENU_BAR_HEIGHT
 
-const juce::Colour BlomeColour_1 = juce::Colour(105, 105, 105);
-const juce::Colour BlomeColour_2 = juce::Colour(0, 0, 0).withAlpha(0.0f);
-const juce::Colour BlomeColour_3 = juce::Colour(0, 0, 0).withAlpha(0.3f);
-const juce::Colour BlomeColour_4 = juce::Colour(0, 0, 0).withAlpha(0.6f);
-const juce::Colour BlomeColour_5 = juce::Colour(105, 105, 105).withAlpha(0.3f);
-const juce::Colour BlomeColour_6 = juce::Colour(0, 0, 0).withAlpha(0.8f);
-const juce::Colour BlomeColour_7 = juce::Colour(125, 125, 125);
+#define COMPONENT_LABEL_HEIGHT          20
 
-const juce::Font font_1("Helvetica Neue", 12.00f, juce::Font::bold);
-const juce::Font font_2("Helvetica Neue", 22.00f, juce::Font::bold);
-const juce::Font font_3("Helvetica Neue", 48.00f, juce::Font::bold);
+// Light Gray
+const juce::Colour BlomeColour_LightGray = juce::Colour(150, 150, 150);
+const juce::Colour BlomeColour_LightGrayLightTransparent = juce::Colour(BlomeColour_LightGray).withAlpha(0.5f);
+
+// Gray
+const juce::Colour BlomeColour_Gray = juce::Colour(70, 70, 70);
+
+// Dark Gray
+const juce::Colour BlomeColour_DarkGray = juce::Colour(40, 40, 40);
+
+// Black
+const juce::Colour BlomeColour_Black = juce::Colour(0, 0, 0);
+const juce::Colour BlomeColour_BlackFullTransparent = juce::Colour(BlomeColour_Black).withAlpha(0.0f);
+const juce::Colour BlomeColour_BlackLightTransparent = juce::Colour(BlomeColour_Black).withAlpha(0.63f);
+const juce::Colour BlomeColour_BlackMediumTransparent = juce::Colour(BlomeColour_Black).withAlpha(0.78f);
+const juce::Colour BlomeColour_BlackStrongTransparent = juce::Colour(BlomeColour_Black).withAlpha(0.95f);
+
+// Dark Yellow
+const juce::Colour BlomeColour_DarkYellow = juce::Colour(138, 39, 0);
+const juce::Colour BlomeColour_DarkYellowStrongTransparent = juce::Colour(BlomeColour_DarkYellow).withAlpha(0.99f);
+
+// Fonts
+const juce::Font font_small_bold("Helvetica Neue", 12.00f, juce::Font::bold);
+const juce::Font font_small_accentuated("Helvetica Neue", 12.30f, juce::Font::bold);
+const juce::Font font_medium("Helvetica Neue", 22.00f, juce::Font::bold);
+const juce::Font font_large("Helvetica Neue", 48.00f, juce::Font::bold);

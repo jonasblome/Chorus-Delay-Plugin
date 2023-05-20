@@ -30,11 +30,16 @@ void BlomeVUMeter::paint(juce::Graphics& g)
 {
     const int meter_w = getWidth() / 3;
     
-    g.setColour(BlomeColour_6);
+    g.setColour(BlomeColour_BlackMediumTransparent);
+    const float cornerSize = 3.0f;
+    
     // Left
-    g.fillRect(0, 0, meter_w, getHeight());
+    const juce::Rectangle<int> meter1 (0, 0, meter_w, getHeight());
+    g.fillRoundedRectangle(meter1.toFloat(), cornerSize);
+    
     // Right
-    g.fillRect(meter_w * 2, 0, meter_w, getHeight());
+    const juce::Rectangle<int> meter2 (meter_w * 2, 0, meter_w, getHeight());
+    g.fillRoundedRectangle(meter2.toFloat(), cornerSize);
     
     int ch0Fill = getHeight() - (getHeight() * mCh0Level);
     int ch1Fill = getHeight() - (getHeight() * mCh1Level);
@@ -46,7 +51,7 @@ void BlomeVUMeter::paint(juce::Graphics& g)
         ch1Fill = 0;
     }
     
-    g.setColour(BlomeColour_7);
+    g.setColour(BlomeColour_LightGray);
     g.fillRect(0, ch0Fill, meter_w, getHeight());
     g.fillRect(meter_w * 2, ch1Fill, meter_w, getHeight());
 }

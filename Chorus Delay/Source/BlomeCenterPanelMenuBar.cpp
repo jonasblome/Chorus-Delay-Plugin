@@ -19,9 +19,9 @@ BlomeCenterPanelMenuBar::BlomeCenterPanelMenuBar(ChorusDelayAudioProcessor* inPr
     const int width = 85;
     
     mFxTypeComboBox = std::make_unique<BlomeParameterComboBox>(mProcessor->parameters, BlomeParameterID[kParameter_DelayType]);
-    mFxTypeComboBox->setBounds(getWidth() - width, 0, width, getHeight());
-    mFxTypeComboBox->addItem("DELAY", 1);
-    mFxTypeComboBox->addItem("CHORUS", 2);
+    mFxTypeComboBox->setBounds(getWidth() * 0.5 - width * 0.5, 0, width, getHeight());
+    mFxTypeComboBox->addItem("Delay", 1);
+    mFxTypeComboBox->addItem("Chorus", 2);
     mFxTypeComboBox->setSelectedItemIndex((int)*mProcessor->parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayType]), juce::dontSendNotification);
     addAndMakeVisible(mFxTypeComboBox.get());
 }

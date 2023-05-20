@@ -22,21 +22,21 @@ BlomeTopPanel::BlomeTopPanel(ChorusDelayAudioProcessor* inProcessor)
     int button_h = 25;
     
     mNewPreset = std::make_unique<juce::TextButton>();
-    mNewPreset->setButtonText("NEW");
+    mNewPreset->setButtonText("New");
     mNewPreset->setBounds(button_x, button_y, button_w, button_h);
     mNewPreset->addListener(this);
     addAndMakeVisible(*mNewPreset);
     button_x = button_x + button_w;
     
     mSavePreset = std::make_unique<juce::TextButton>();
-    mSavePreset->setButtonText("SAVE");
+    mSavePreset->setButtonText("Save");
     mSavePreset->setBounds(button_x, button_y, button_w, button_h);
     mSavePreset->addListener(this);
     addAndMakeVisible(*mSavePreset);
     button_x = button_x + button_w;
     
     mSaveAsPreset = std::make_unique<juce::TextButton>();
-    mSaveAsPreset->setButtonText("SAVE AS");
+    mSaveAsPreset->setButtonText("Save As");
     mSaveAsPreset->setBounds(button_x, button_y, button_w, button_h);
     mSaveAsPreset->addListener(this);
     addAndMakeVisible(*mSaveAsPreset);
@@ -62,12 +62,12 @@ void BlomeTopPanel::paint(juce::Graphics& g)
 {
     BlomePanelBase::paint(g);
     
-    g.setColour(BlomeColour_1);
-    g.setFont(font_2);
+    g.setColour(BlomeColour_BlackMediumTransparent);
+    g.setFont(font_medium);
     
     const int label_w = 220;
     
-    g.drawFittedText("BLOME AUDIO PLUGIN", TOP_PANEL_WIDTH - label_w - 20, 0, label_w, getHeight(), juce::Justification::centredRight, 1);
+    g.drawFittedText("Blome Audio", TOP_PANEL_WIDTH - label_w - 20, 0, label_w, getHeight(), juce::Justification::centredRight, 1);
 }
 
 void BlomeTopPanel::buttonClicked (juce::Button* b)

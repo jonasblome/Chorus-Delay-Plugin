@@ -11,13 +11,13 @@
 #pragma once
 
 #include "JuceHeader.h"
-#include "BlomeAudioHelper.h"
+#include "BlomeAudioHelpers.h"
 
 enum BlomeFilterType
 {
     kBlomeFilterType_Lowpass = 0,
+    kBlomeFilterType_Highpass,
     kBlomeFilterType_Bandpass,
-    kBlomeFilterType_Highpass
 };
 
 class BlomeFilter
@@ -40,7 +40,6 @@ public:
                        int inNumSamplesToRender);
     
     void process(float* inAudio,
-                 float inWetDry,
                  float* outAudio,
                  int inNumSamplesToRender);
     
@@ -49,5 +48,5 @@ private:
     float mCutoffFreq;
     float mBuffer[maxBufferSize];
     
-    juce::dsp::ProcessorDuplicator<juce::dsp::FIR::Filter<float>, juce::dsp::FIR::Coefficients<float>> mFilter;
+    juce::dsp::ProcessorDuplicator<juce::dsp::IIR::Filter<float>, juce::dsp::IIR::Coefficients<float>> mFilter;
 };

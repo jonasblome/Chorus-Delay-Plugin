@@ -21,7 +21,39 @@ enum BlomeParameter
     kParameter_ModulationRate,
     kParameter_ModulationDepth,
     kParameter_FilterCutoff,
+    kParameter_FilterActivated,
+    kParameter_FilterType,
     kParameter_TotalNumParameters,
+};
+
+static juce::NormalisableRange<float> BlomeParameterRanges [kParameter_TotalNumParameters] =
+{
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 1.0f),
+    juce::NormalisableRange<float>(0.0f, 2.0f),
+};
+
+static float BlomeParameterDefaultValues [kParameter_TotalNumParameters] =
+{
+    0.5f,
+    0.5f,
+    0.5f,
+    0.5f,
+    0.0f,
+    0.5f,
+    0.5f,
+    0.5f,
+    0.5f,
+    1.0f,
+    2.0f,
 };
 
 static juce::String BlomeParameterID [kParameter_TotalNumParameters] =
@@ -30,11 +62,13 @@ static juce::String BlomeParameterID [kParameter_TotalNumParameters] =
     "Time",
     "Feedback",
     "WetDry",
-    "Type",
+    "FXType",
     "OutputGain",
     "ModulationRate",
     "ModulationDepth",
     "FilterCutoff",
+    "FilterActivated",
+    "FilterType",
 };
 
 static juce::String BlomeParameterLabels [kParameter_TotalNumParameters] =
@@ -42,10 +76,11 @@ static juce::String BlomeParameterLabels [kParameter_TotalNumParameters] =
     "Input Gain",
     "Time",
     "Feedback",
-    "Wet Dry",
+    "Wet/Dry",
     "Type",
     "Output Gain",
-    "Modulation Rate",
-    "Modulation Depth",
+    "Rate",
+    "Depth",
     "Filter Cutoff",
+    "Filter Type",
 };

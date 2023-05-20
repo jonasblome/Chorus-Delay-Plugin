@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "BlomeAudioHelper.h"
+#include "BlomeAudioHelpers.h"
 
 class BlomeLFO
 {
@@ -25,6 +25,7 @@ public:
     void process(float inRate, float inDepth, int inNumSamples);
     
     float* getBuffer();
+    
 private:
     double mSampleRate;
     

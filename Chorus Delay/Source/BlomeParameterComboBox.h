@@ -16,7 +16,8 @@ class BlomeParameterComboBox
 :   public juce::ComboBox
 {
 public:
-    BlomeParameterComboBox(juce::AudioProcessorValueTreeState& stateToControl, const juce::String& parameterID);
+    BlomeParameterComboBox(juce::AudioProcessorValueTreeState& stateToControl,
+                           const juce::String& parameterID);
     ~BlomeParameterComboBox();
     
 private:

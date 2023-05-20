@@ -10,7 +10,7 @@
 
 #include "BlomeDelay.h"
 #include "JuceHeader.h"
-#include "BlomeAudioHelper.h"
+#include "BlomeAudioHelpers.h"
 
 BlomeDelay::BlomeDelay()
 :   mSampleRate(-1),
@@ -35,14 +35,15 @@ void BlomeDelay::reset()
     juce::zeromem(mBuffer, sizeof(double) * maxBufferSize);
 }
 
-void BlomeDelay::process(float* inAudio,
-             float inTime,
-             float inFeedback,
-             float inWetDry,
-             float inType,
-             float* inModulationBuffer,
-             float* outAudio,
-             int inNumSamplesToRender)
+void BlomeDelay::process(float* inAudioRaw,
+                         float* inAudioFiltered,
+                         float inTime,
+                         float inFeedback,
+                         float inWetDry,
+                         float inType,
+                         float* inModulationBuffer,
+                         float* outAudio,
+                         int inNumSamplesToRender)
 {
     const float wet = inWetDry;
     const float dry = 1.0f - wet;
@@ -60,11 +61,11 @@ void BlomeDelay::process(float* inAudio,
         const double delayTimeInSamples = mTimeSmoothed * mSampleRate;
         const double sample = getInterpolatedSample(delayTimeInSamples);
         
-        mBuffer[mDelayIndex] = tanh_clip(inAudio[i] + (mFeedbackSample * feedbackMapped));
+        mBuffer[mDelayIndex] = tanh_clip(inAudioFiltered[i] + (mFeedbackSample * feedbackMapped));
         
         mFeedbackSample = sample;
         
-        outAudio[i] = inAudio[i] * dry + sample * wet;
+        outAudio[i] = inAudioRaw[i] * dry + sample * wet;
         
         mDelayIndex++;
         

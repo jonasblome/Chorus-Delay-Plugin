@@ -98,11 +98,12 @@ void ChorusDelayAudioProcessor::changeProgramName (int index, const juce::String
 //==============================================================================
 void ChorusDelayAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    for(int c = 0; c < 2; c++) {
+    for(int c = 0; c < 2; c++)
+    {
         mDelay[c]->setSampleRate(sampleRate);
         mLFO[c]->setSampleRate(sampleRate);
         mFilter[c]->setSampleRate(sampleRate);
-        mFilter[c]->prepareFilter(*parameters.getRawParameterValue(BlomeParameterID[kParameter_FilterCutoff]), kBlomeFilterType_Lowpass, samplesPerBlock);
+        mFilter[c]->prepareFilter(*parameters.getRawParameterValue(BlomeParameterID[kParameter_FilterCutoff]), mFilterType, samplesPerBlock);
     }
 }
 
@@ -110,10 +111,16 @@ void ChorusDelayAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 2; i++)
+    {
         mDelay[i]->reset();
         mLFO[i]->reset();
-        mFilter[i]->reset();
+        if (mFilterActivated)
+        {
+            mFilter[i]->reset();
+        }
+        
+        juce::zeromem(mFilteredSignalBuffer[i], sizeof(double) * maxBufferSize);
     }
 }
 
@@ -155,7 +162,8 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
-    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {
+    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
+    {
         buffer.clear (i, 0, buffer.getNumSamples());
     }
 
@@ -174,10 +182,16 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
                                 channelData,
                                 buffer.getNumSamples());
         
-        mFilter[channel]->process(channelData,
-                                  *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayWetDry]),
-                                  channelData,
-                                  buffer.getNumSamples());
+        if (mFilterActivated)
+        {
+            mFilter[channel]->process(channelData,
+                                      mFilteredSignalBuffer[channel],
+                                      buffer.getNumSamples());
+        }
+        else
+        {
+            std::memcpy(mFilteredSignalBuffer[channel], channelData, buffer.getNumSamples() * sizeof(*channelData));
+        }
         
         float rate = (channel == 0) ? 0.0f : (float)*parameters.getRawParameterValue(BlomeParameterID[kParameter_ModulationRate]);
         
@@ -186,6 +200,7 @@ void ChorusDelayAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
                                buffer.getNumSamples());
         
         mDelay[channel]->process(channelData,
+                                 mFilteredSignalBuffer[channel],
                                  *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayTime]),
                                  *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayFeedback]),
                                  *parameters.getRawParameterValue(BlomeParameterID[kParameter_DelayWetDry]),
@@ -234,12 +249,15 @@ void ChorusDelayAudioProcessor::setStateInformation (const void* data, int sizeI
     juce::XmlElement xmlState = *getXmlFromBinary(data, sizeInBytes);
     juce::XmlElement* xmlStatePtr = &xmlState;
     
-    if(xmlStatePtr) {
-        for(auto* child: xmlStatePtr->getChildIterator()){
+    if(xmlStatePtr)
+    {
+        for (auto* child: xmlStatePtr->getChildIterator())
+        {
             mPresetManager->loadPresetForXml(*child);
         }
     }
-    else {
+    else
+    {
         jassertfalse;
     }
 }
@@ -263,26 +281,45 @@ juce::AudioProcessorValueTreeState::ParameterLayout ChorusDelayAudioProcessor::c
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
     for (int p = 0; p < kParameter_TotalNumParameters; ++p)
-        layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (
-                                                                juce::ParameterID(BlomeParameterID[p], 1),
-                                                                BlomeParameterLabels[p],
-                                                                juce::NormalisableRange<float>(0.0f, 1.0f),
-                                                                0.5f));
+    {
+        layout.add(std::make_unique<juce::AudioProcessorValueTreeState::Parameter> (juce::ParameterID(BlomeParameterID[p], 1),
+                                                                                    BlomeParameterLabels[p],
+                                                                                    BlomeParameterRanges[p],
+                                                                                    BlomeParameterDefaultValues[p]));
+    }
 
     return layout;
 }
 
 void ChorusDelayAudioProcessor::updateFilter(float inCutoffFreq)
 {
-    for(int c = 0; c < getTotalNumInputChannels(); c++) {
-        mFilter[c]->updateFilter(inCutoffFreq, kBlomeFilterType_Lowpass, getBlockSize());
+    if (mFilterActivated)
+    {
+        for(int c = 0; c < getTotalNumInputChannels(); c++)
+        {
+            mFilter[c]->updateFilter(inCutoffFreq, mFilterType, getBlockSize());
+        }
     }
+}
+
+void ChorusDelayAudioProcessor::toggleFilterActivated()
+{
+    mFilterActivated = !mFilterActivated;
+}
+
+void ChorusDelayAudioProcessor::setFilterType(BlomeFilterType inFilterType)
+{
+    mFilterType = inFilterType;
+    updateFilter(*parameters.getRawParameterValue(BlomeParameterID[kParameter_FilterCutoff]));
 }
 
 void ChorusDelayAudioProcessor::initializeDSP()
 {
+    mFilterActivated = true;
+    mFilterType = kBlomeFilterType_Bandpass;
     
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 2; i++)
+    {
         mInputGain[i] = std::make_unique<BlomeGain>();
         mOutputGain[i] = std::make_unique<BlomeGain>();
         mDelay[i] = std::make_unique<BlomeDelay>();

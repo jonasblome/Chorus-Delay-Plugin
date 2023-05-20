@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "BlomeAudioHelper.h"
+#include "BlomeAudioHelpers.h"
 
 enum BlomeDelayType
 {
@@ -28,7 +28,8 @@ public:
     
     void reset();
     
-    void process(float* inAudio,
+    void process(float* inAudioRaw,
+                 float* inAudioFiltered,
                  float inTime,
                  float inFeedback,
                  float inWetDry,

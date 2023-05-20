@@ -26,9 +26,6 @@ ChorusDelayAudioProcessorEditor::ChorusDelayAudioProcessorEditor (ChorusDelayAud
     setLookAndFeel(&*mLookAndFeel);
     
     juce::LookAndFeel::setDefaultLookAndFeel(&*mLookAndFeel);
-    
-    mBackgroundImage = juce::ImageCache::getFromMemory(BinaryData::kadenze_bg_png,
-                                                       BinaryData::kadenze_bg_pngSize);
 }
 
 ChorusDelayAudioProcessorEditor::~ChorusDelayAudioProcessorEditor()
@@ -39,7 +36,8 @@ ChorusDelayAudioProcessorEditor::~ChorusDelayAudioProcessorEditor()
 void ChorusDelayAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.drawImage(mBackgroundImage, getLocalBounds().toFloat());
+    g.setColour(BlomeColour_DarkYellow);
+    g.fillAll();
 }
 
 void ChorusDelayAudioProcessorEditor::resized()

@@ -18,20 +18,17 @@ class BlomeLookAndFeel
 public:
     BlomeLookAndFeel()
     {
-        //Store Image Assets
-        mSliderImage = juce::ImageCache::getFromMemory(BinaryData::kadenze_knob_png,
-                                                       BinaryData::kadenze_knob_pngSize);
-        
         // ComboBox Colours
-        setColour(juce::ComboBox::backgroundColourId, BlomeColour_3);
-        setColour(juce::ComboBox::outlineColourId, BlomeColour_2);
-        setColour(juce::ComboBox::arrowColourId, BlomeColour_1);
-        setColour(juce::ComboBox::textColourId, BlomeColour_1);
+        setColour(juce::ComboBox::backgroundColourId, BlomeColour_BlackLightTransparent);
+        setColour(juce::ComboBox::outlineColourId, BlomeColour_Black);
+        setColour(juce::ComboBox::arrowColourId, BlomeColour_LightGray);
+        setColour(juce::ComboBox::textColourId, BlomeColour_LightGray);
+        setColour(juce::PopupMenu::backgroundColourId, BlomeColour_DarkYellowStrongTransparent);
         
         // Button Text Colours
-        setColour(juce::TextButton::buttonColourId, BlomeColour_1);
-        setColour(juce::TextButton::textColourOnId, BlomeColour_1);
-        setColour(juce::TextButton::textColourOffId, BlomeColour_1);
+        setColour(juce::TextButton::buttonColourId, BlomeColour_LightGray);
+        setColour(juce::TextButton::textColourOnId, BlomeColour_LightGray);
+        setColour(juce::TextButton::textColourOffId, BlomeColour_LightGray);
     }
     
     virtual ~BlomeLookAndFeel() {
@@ -41,20 +38,22 @@ public:
     /** Buttons */
     juce::Font getTextButtonFont (juce::TextButton&, int buttonHeight) override
     {
-        return font_1;
+        return font_small_bold;
     }
     
-    void drawButtonBackground (juce::Graphics& g, juce::Button& button, const juce::Colour& backgroundColour,
-                               bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override
+    void drawButtonBackground (juce::Graphics& g, juce::Button& button,
+                               const juce::Colour& backgroundColour,
+                               bool shouldDrawButtonAsHighlighted,
+                               bool shouldDrawButtonAsDown) override
     {
         juce::Colour fillColour;
         
         if(shouldDrawButtonAsDown) {
-            fillColour = BlomeColour_6;
+            fillColour = BlomeColour_BlackStrongTransparent;
         } else if(shouldDrawButtonAsHighlighted) {
-            fillColour = BlomeColour_5;
+            fillColour = BlomeColour_BlackLightTransparent;
         } else {
-            fillColour = BlomeColour_3;
+            fillColour = BlomeColour_BlackMediumTransparent;
         }
         
         const float cornerSize = 6.0f;
@@ -63,10 +62,53 @@ public:
         g.fillRoundedRectangle(bounds.reduced(1), cornerSize);
     }
     
+    void drawToggleButton (juce::Graphics& g,
+                           juce::ToggleButton& button,
+                           bool shouldDrawButtonAsHighlighted,
+                           bool shouldDrawButtonAsDown) override
+     {
+         juce::Colour fillColour;
+         float cornerSize = 6.0f;
+         const juce::Rectangle<float> bounds = button.getLocalBounds().toFloat().reduced(0.5f, 0.5f);
+         
+         if(shouldDrawButtonAsHighlighted)
+         {
+             fillColour = BlomeColour_BlackLightTransparent;
+         }
+         else
+         {
+             fillColour = BlomeColour_BlackMediumTransparent;
+         }
+
+         if (!button.isEnabled())
+         {
+             g.setOpacity (0.5f);
+         }
+         
+         g.setColour(fillColour);
+         g.fillRoundedRectangle(bounds.reduced(1), cornerSize);
+         
+         if(button.getToggleState())
+         {
+             cornerSize = 4.0f;
+             g.setColour(BlomeColour_DarkYellow);
+             g.fillRoundedRectangle(bounds.reduced(3), cornerSize);
+         }
+     }
+    
     /** ComboBoxes */
     juce::Font getLabelFont(juce::Label& label) override
     {
-        return font_1;
+        return font_small_bold;
+    }
+    
+    void drawPopupMenuBackgroundWithOptions(juce::Graphics& g,
+                                            int width,
+                                            int height,
+                                            const juce::PopupMenu::Options& options) override
+    {
+        g.setColour(findColour(juce::PopupMenu::backgroundColourId));
+        g.fillRoundedRectangle(0, 2, width, height - 2, 3.0f);
     }
     
     void drawPopupMenuItem (juce::Graphics& g, const juce::Rectangle<int>& area,
@@ -76,14 +118,9 @@ public:
     {
         juce::Rectangle<int> r (area);
         
-        juce::Colour fillColour = isHighlighted ? BlomeColour_5 : BlomeColour_4;
-        g.setColour(fillColour);
-        
-        g.fillRect(r.getX(), r.getY(), r.getWidth(), r.getHeight() - 1);
-        
-        juce::Colour fontColour = isTicked ? BlomeColour_7 : BlomeColour_1;
+        juce::Colour fontColour = isTicked ? BlomeColour_BlackStrongTransparent : BlomeColour_BlackLightTransparent;
         g.setColour(fontColour);
-        g.setFont(font_1);
+        g.setFont(isTicked ? font_small_accentuated : font_small_bold);
         
         r.setLeft(10);
         r.setY(1);
@@ -97,7 +134,7 @@ public:
         const float cornerSize = 3.0f;
         const juce::Rectangle<int> boxBounds (0, 0, width, height);
         
-        g.setColour(BlomeColour_3);
+        g.setColour(BlomeColour_BlackMediumTransparent);
         g.fillRoundedRectangle(boxBounds.toFloat(), cornerSize);
         
         juce::Rectangle<int> arrow (width - 30, 0, 20, height);
@@ -114,31 +151,25 @@ public:
         g.strokePath(path, juce::PathStrokeType(2.0f));
     }
     
+    void positionComboBoxText (juce::ComboBox& box, juce::Label& label) override
+    {
+        label.setBounds(6, 1, box.getWidth() - 30, box.getHeight() - 2);
+        label.setFont (getComboBoxFont(box));
+    }
+    
     /** Sliders **/
     void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height,
                            float sliderPosProportional, float rotaryStartAngle,
                            float rotaryEndAngle, juce::Slider& slider) override
     {
-        const int numFrames = mSliderImage.getHeight() / mSliderImage.getWidth();
-        const int frameIndex = (int)std::ceil(sliderPosProportional * (numFrames - 1));
-        
-        const float radius = juce::jmin(width * 0.5, height * 0.5);
-        const float centreX = x + width * 0.5f;
-        const float centreY = y + height * 0.5f;
-        const float rx = centreX - radius;
-        const float ry = centreY - radius;
-        
-        g.drawImage(mSliderImage,
-                    rx,
-                    ry,
-                    2 * radius,
-                    2 * radius,
-                    0,
-                    frameIndex * mSliderImage.getWidth(),
-                    mSliderImage.getWidth(),
-                    mSliderImage.getWidth());
+        g.setColour(BlomeColour_BlackMediumTransparent);
+        g.fillEllipse(x + 6, y + 6, width - 14, height - 14);
+        g.setColour(BlomeColour_LightGray);
+//        g.drawEllipse(x + 5, y + 5, width - 12, height - 12, 2);
+        juce::Line<float> sliderTick = juce::Line<float>::fromStartAndAngle(juce::Point<float>(width * 0.5 - 1, height * 0.5 - 1), (width - 19) * 0.5, sliderPosProportional * M_PI * 1.5 - (M_PI * 0.75));
+        g.drawLine(sliderTick, 2.0);
     }
     
 private:
-    juce::Image mSliderImage;
+    
 };

@@ -26,9 +26,9 @@
 /* Begin PBXBuildFile section */
 		073EE56DA41F17456DE11B36 /* include_juce_gui_basics.mm */ = {isa = PBXBuildFile; fileRef = 90C2A960064B2D6F72DEB2A7; };
 		07EFC69CAFE33EF4BC8BC1C8 /* VST3 */ = {isa = PBXBuildFile; fileRef = 20113C4F7DA101D3F056E722; };
+		0B199855F34EBAEF4B2206D9 /* BlomeParameterToggleButton.cpp */ = {isa = PBXBuildFile; fileRef = F26FB2C7FDD0F5F967513FB9; };
 		17FA479E5C4428E082FCD45E /* include_juce_graphics.mm */ = {isa = PBXBuildFile; fileRef = BD4E9709B784CB3671C3600E; };
 		2168D95038DAC973B65216ED /* BlomeParameterSlider.cpp */ = {isa = PBXBuildFile; fileRef = 4ED190160A756440B178539C; };
-		263858366773E682DD7DFAE8 /* BinaryData.cpp */ = {isa = PBXBuildFile; fileRef = DC142914F1BDEAD09DA17183; };
 		26680513320F93C43AD744DA /* include_juce_core.mm */ = {isa = PBXBuildFile; fileRef = 4D3C85D085B744039B3214FA; };
 		2B600163F1F35045E3B0963E /* BlomeDelay.cpp */ = {isa = PBXBuildFile; fileRef = AAA3D7F264D17212A8EB53FF; };
 		313EB0C830523BBF2D046B9F /* include_juce_data_structures.mm */ = {isa = PBXBuildFile; fileRef = 62679F4B757EB1D36EE2CA2D; };
@@ -122,10 +122,10 @@
 		5EBFE11461DD7ABD3DF0B0A6 /* DiscRecording.framework */ /* DiscRecording.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
 		5F9CD9F578F953764E041A99 /* BlomeMainPanel.h */ /* BlomeMainPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeMainPanel.h; path = ../../Source/BlomeMainPanel.h; sourceTree = SOURCE_ROOT; };
 		62679F4B757EB1D36EE2CA2D /* include_juce_data_structures.mm */ /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
+		69ACD45E4F8B4DAAE986EB3C /* BlomeAudioHelpers.h */ /* BlomeAudioHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeAudioHelpers.h; path = ../../Source/BlomeAudioHelpers.h; sourceTree = SOURCE_ROOT; };
 		6D1BBF1BD4834EC4FA4B5DD3 /* include_juce_audio_plugin_client_VST3.cpp */ /* include_juce_audio_plugin_client_VST3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_VST3.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST3.cpp; sourceTree = SOURCE_ROOT; };
 		6D5B05AF4C3DDD15A11F50F9 /* JuceHeader.h */ /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
 		6E9F3E72F68CDE20D5CBC3E9 /* include_juce_audio_plugin_client_VST_utils.mm */ /* include_juce_audio_plugin_client_VST_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_VST_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm; sourceTree = SOURCE_ROOT; };
-		720343209CA9AC768FABF72F /* BinaryData.h */ /* BinaryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BinaryData.h; path = ../../JuceLibraryCode/BinaryData.h; sourceTree = SOURCE_ROOT; };
 		72408C38AE6D911375FFC03B /* juce_audio_utils */ /* juce_audio_utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_utils; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_utils; sourceTree = "<absolute>"; };
 		7442E4EF1B2A23EF5BE31160 /* BlomeVUMeter.cpp */ /* BlomeVUMeter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeVUMeter.cpp; path = ../../Source/BlomeVUMeter.cpp; sourceTree = SOURCE_ROOT; };
 		74AFA771832BB0F7321847EE /* BlomeFXPanel.h */ /* BlomeFXPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeFXPanel.h; path = ../../Source/BlomeFXPanel.h; sourceTree = SOURCE_ROOT; };
@@ -145,16 +145,15 @@
 		90C2A960064B2D6F72DEB2A7 /* include_juce_gui_basics.mm */ /* include_juce_gui_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_basics.mm; path = ../../JuceLibraryCode/include_juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
 		9805FD177B12EA8C44870128 /* AU */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chorus Delay.component"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CF79561185C8B093CD2B456 /* BlomeFilter.h */ /* BlomeFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeFilter.h; path = ../../Source/BlomeFilter.h; sourceTree = SOURCE_ROOT; };
-		9E06A94BC154BE408E1851A1 /* BlomeAudioHelper.h */ /* BlomeAudioHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeAudioHelper.h; path = ../../Source/BlomeAudioHelper.h; sourceTree = SOURCE_ROOT; };
 		A0D622F0F7974F4C71D8C06F /* BlomeLFO.h */ /* BlomeLFO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeLFO.h; path = ../../Source/BlomeLFO.h; sourceTree = SOURCE_ROOT; };
 		A2BE2BD9588F0A40D48CF29A /* AudioUnit.framework */ /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		A3AA9FE2FACCFF2C1E9B2562 /* BlomePanelBase.h */ /* BlomePanelBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomePanelBase.h; path = ../../Source/BlomePanelBase.h; sourceTree = SOURCE_ROOT; };
 		AAA3D7F264D17212A8EB53FF /* BlomeDelay.cpp */ /* BlomeDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeDelay.cpp; path = ../../Source/BlomeDelay.cpp; sourceTree = SOURCE_ROOT; };
-		AD2132D65F626ACABD0EE40B /* kadenze_bg.png */ /* kadenze_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kadenze_bg.png; path = ../../Assets/kadenze_bg.png; sourceTree = SOURCE_ROOT; };
 		AF0FD4163259E06D8DF4949A /* BlomeInterfaceDefines.h */ /* BlomeInterfaceDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeInterfaceDefines.h; path = ../../Source/BlomeInterfaceDefines.h; sourceTree = SOURCE_ROOT; };
 		AF2CE079E517334CEE412D47 /* include_juce_audio_plugin_client_ARA.cpp */ /* include_juce_audio_plugin_client_ARA.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_ARA.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_ARA.cpp; sourceTree = SOURCE_ROOT; };
 		B0F31E3BA52DA8B22EA5BBCA /* Cocoa.framework */ /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B27D5D2A2FFAA0F71529DAAA /* BlomeParameterComboBox.h */ /* BlomeParameterComboBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeParameterComboBox.h; path = ../../Source/BlomeParameterComboBox.h; sourceTree = SOURCE_ROOT; };
+		B45E175874553768F0D1B1E9 /* BlomeParameterToggleButton.h */ /* BlomeParameterToggleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeParameterToggleButton.h; path = ../../Source/BlomeParameterToggleButton.h; sourceTree = SOURCE_ROOT; };
 		B732BEA2B8A78F1127370FC4 /* PluginEditor.h */ /* PluginEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginEditor.h; path = ../../Source/PluginEditor.h; sourceTree = SOURCE_ROOT; };
 		BD4C7B038BCD95E1C533383C /* Info-VST3.plist */ /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3.plist"; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
 		BD4E9709B784CB3671C3600E /* include_juce_graphics.mm */ /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
@@ -171,13 +170,12 @@
 		D7A4034816E48B9A5F46473C /* BlomeHelperFunctions.h */ /* BlomeHelperFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeHelperFunctions.h; path = ../../Source/BlomeHelperFunctions.h; sourceTree = SOURCE_ROOT; };
 		D7E4E49E7878393B5678624E /* PluginProcessor.h */ /* PluginProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginProcessor.h; path = ../../Source/PluginProcessor.h; sourceTree = SOURCE_ROOT; };
 		DB586971985930791C168D44 /* BlomeLFO.cpp */ /* BlomeLFO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeLFO.cpp; path = ../../Source/BlomeLFO.cpp; sourceTree = SOURCE_ROOT; };
-		DC142914F1BDEAD09DA17183 /* BinaryData.cpp */ /* BinaryData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData.cpp; path = ../../JuceLibraryCode/BinaryData.cpp; sourceTree = SOURCE_ROOT; };
 		E5A643C9A5A2908A4FE4D2D8 /* BlomeFilter.cpp */ /* BlomeFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeFilter.cpp; path = ../../Source/BlomeFilter.cpp; sourceTree = SOURCE_ROOT; };
-		E860216C485078C0E4125E20 /* kadenze_knob.png */ /* kadenze_knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kadenze_knob.png; path = ../../Assets/kadenze_knob.png; sourceTree = SOURCE_ROOT; };
 		EA8C7E96D7648DED72D98A98 /* CoreMIDI.framework */ /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		F0CCA5EAF0B41F652E24CFF8 /* include_juce_audio_utils.mm */ /* include_juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
 		F18EE86C1F5E2C596964C392 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_basics; sourceTree = "<absolute>"; };
 		F26E53BE1E609AC84F29EDDC /* BlomeLookAndFeel.h */ /* BlomeLookAndFeel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomeLookAndFeel.h; path = ../../Source/BlomeLookAndFeel.h; sourceTree = SOURCE_ROOT; };
+		F26FB2C7FDD0F5F967513FB9 /* BlomeParameterToggleButton.cpp */ /* BlomeParameterToggleButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlomeParameterToggleButton.cpp; path = ../../Source/BlomeParameterToggleButton.cpp; sourceTree = SOURCE_ROOT; };
 		F6A4F2E13EB3FBEA580DF5DE /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = /Users/jonasblome/Documents/JUCE/modules/juce_audio_formats; sourceTree = "<absolute>"; };
 		F7ED5576FE2F2697578BA0FF /* BlomePresetManager.h */ /* BlomePresetManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlomePresetManager.h; path = ../../Source/BlomePresetManager.h; sourceTree = SOURCE_ROOT; };
 		F8B9B8B6C40F8DCB01D16241 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chorus Delay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,22 +278,13 @@
 		1872F04DE6701E792388E681 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9E06A94BC154BE408E1851A1,
+				69ACD45E4F8B4DAAE986EB3C,
 				D7A4034816E48B9A5F46473C,
 				AF0FD4163259E06D8DF4949A,
 				F26E53BE1E609AC84F29EDDC,
 				D4608855629498AAE8E5F59A,
 			);
 			name = Helpers;
-			sourceTree = "<group>";
-		};
-		3478B317BDEA1D0C427E23A9 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				AD2132D65F626ACABD0EE40B,
-				E860216C485078C0E4125E20,
-			);
-			name = Assets;
 			sourceTree = "<group>";
 		};
 		44A48B4B18C1910E251C75F4 /* Managers */ = {
@@ -342,6 +331,8 @@
 		9134F5DE98A2C82C8366484D /* Parameter Control */ = {
 			isa = PBXGroup;
 			children = (
+				F26FB2C7FDD0F5F967513FB9,
+				B45E175874553768F0D1B1E9,
 				8CFCDEC63A110D7F140205F7,
 				B27D5D2A2FFAA0F71529DAAA,
 				4ED190160A756440B178539C,
@@ -364,8 +355,6 @@
 		9C3FB767B6F58C301F318446 /* JUCE Library Code */ = {
 			isa = PBXGroup;
 			children = (
-				DC142914F1BDEAD09DA17183,
-				720343209CA9AC768FABF72F,
 				C7B2657FD453DEB5F6BB4970,
 				2203AF40CBD32CB89AC425F1,
 				06C7F9B9949939C77A223A24,
@@ -423,7 +412,6 @@
 				1872F04DE6701E792388E681,
 				0E71551B17069694E914923F,
 				913FD9ADACA7F35FC03D5D5B,
-				3478B317BDEA1D0C427E23A9,
 			);
 			name = "Chorus Delay";
 			sourceTree = "<group>";
@@ -716,6 +704,7 @@
 			files = (
 				485B4CBDE9DD00E0965661F9,
 				5CE2DE7CA8D105ECA7FC7872,
+				0B199855F34EBAEF4B2206D9,
 				F8A4E5BDC28A8029E0CBB4B2,
 				2168D95038DAC973B65216ED,
 				F9E651C020853DBFEC386D4C,
@@ -731,7 +720,6 @@
 				736E98E8D38B6EE6B302ABA5,
 				708CB17214992E2BCDAD5D13,
 				4F255066F5AB01753FBE5134,
-				263858366773E682DD7DFAE8,
 				C39DECFCD4CDAC809DD29172,
 				B8C97574B8889BA7699BC415,
 				D0867B5516408A880A9763C9,
