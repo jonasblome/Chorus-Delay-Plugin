@@ -165,7 +165,6 @@ public:
         g.setColour(BlomeColour_BlackMediumTransparent);
         g.fillEllipse(x + 6, y + 6, width - 14, height - 14);
         g.setColour(BlomeColour_LightGray);
-//        g.drawEllipse(x + 5, y + 5, width - 12, height - 12, 2);
         juce::Line<float> sliderTick = juce::Line<float>::fromStartAndAngle(juce::Point<float>(width * 0.5 - 1, height * 0.5 - 1), (width - 19) * 0.5, sliderPosProportional * M_PI * 1.5 - (M_PI * 0.75));
         g.drawLine(sliderTick, 2.0);
     }

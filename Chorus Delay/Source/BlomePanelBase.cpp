@@ -19,7 +19,6 @@ BlomePanelBase::BlomePanelBase(ChorusDelayAudioProcessor* inProcessor)
 
 BlomePanelBase::~BlomePanelBase()
 {
-    
 }
 
 void BlomePanelBase::mouseEnter(const juce::MouseEvent& event)
@@ -34,8 +33,4 @@ void BlomePanelBase::mouseExit(const juce::MouseEvent& event)
 
 void BlomePanelBase::paint(juce::Graphics& g)
 {
-    if(isMouseOver()) {
-//        g.setColour(BlomeColour_4);
-//        g.fillAll();
-    }
 }
