@@ -23,7 +23,7 @@ public:
         setColour(juce::ComboBox::outlineColourId, BlomeColour_Black);
         setColour(juce::ComboBox::arrowColourId, BlomeColour_LightGray);
         setColour(juce::ComboBox::textColourId, BlomeColour_LightGray);
-        setColour(juce::PopupMenu::backgroundColourId, BlomeColour_DarkYellowStrongTransparent);
+        setColour(juce::PopupMenu::backgroundColourId, BlomeColour_DarkOrangeStrongTransparent);
         
         // Button Text Colours
         setColour(juce::TextButton::buttonColourId, BlomeColour_LightGray);
@@ -91,7 +91,7 @@ public:
          if(button.getToggleState())
          {
              cornerSize = 4.0f;
-             g.setColour(BlomeColour_DarkYellow);
+             g.setColour(BlomeColour_DarkOrange);
              g.fillRoundedRectangle(bounds.reduced(3), cornerSize);
          }
      }

@@ -28,24 +28,9 @@ BlomeFXPanel::~BlomeFXPanel()
 void BlomeFXPanel::paint(juce::Graphics& g)
 {
     BlomePanelBase::paint(g);
-    juce::String label;
-
-    switch (mStyle) {
-        case kBlomeFXPanelStyle_Delay:
-            label = "DELAY";
-            break;
-        case kBlomeFXPanelStyle_Chorus:
-            label = "CHORUS";
-            break;
-        default:
-        case kBlomeFXPanelStyle_TotalNumStyles:
-            jassertfalse;
-    }
     
     g.setColour(BlomeColour_LightGrayLightTransparent);
     g.setFont(font_large);
-    
-    // g.drawText(label, 0, 0, getWidth(), 80, juce::Justification::centred);
     
     // Paint labels
     for(int i = 0; i < mSliders.size(); i++)

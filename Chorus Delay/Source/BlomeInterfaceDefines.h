@@ -49,8 +49,8 @@ const juce::Colour BlomeColour_BlackMediumTransparent = juce::Colour(BlomeColour
 const juce::Colour BlomeColour_BlackStrongTransparent = juce::Colour(BlomeColour_Black).withAlpha(0.95f);
 
 // Dark Yellow
-const juce::Colour BlomeColour_DarkYellow = juce::Colour(138, 39, 0);
-const juce::Colour BlomeColour_DarkYellowStrongTransparent = juce::Colour(BlomeColour_DarkYellow).withAlpha(0.99f);
+const juce::Colour BlomeColour_DarkOrange = juce::Colour(138, 39, 0);
+const juce::Colour BlomeColour_DarkOrangeStrongTransparent = juce::Colour(BlomeColour_DarkOrange).withAlpha(0.99f);
 
 // Fonts
 const juce::Font font_small_bold("Helvetica Neue", 12.00f, juce::Font::bold);

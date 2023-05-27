@@ -9,8 +9,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-#include "BlomeLookAndFeel.h"
-
 //==============================================================================
 ChorusDelayAudioProcessorEditor::ChorusDelayAudioProcessorEditor (ChorusDelayAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
@@ -36,7 +34,7 @@ ChorusDelayAudioProcessorEditor::~ChorusDelayAudioProcessorEditor()
 void ChorusDelayAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.setColour(BlomeColour_DarkYellow);
+    g.setColour(BlomeColour_DarkOrange);
     g.fillAll();
 }
 
