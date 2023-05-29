@@ -20,6 +20,9 @@ ChorusDelayAudioProcessorEditor::ChorusDelayAudioProcessorEditor (ChorusDelayAud
     mMainPanel = std::make_unique<BlomeMainPanel>(&audioProcessor);
     addAndMakeVisible(mMainPanel.get());
     
+    mNoiseOverlayPanel = std::make_unique<BlomeNoiseOverlayPanel>(&audioProcessor);
+    addAndMakeVisible(mNoiseOverlayPanel.get());
+    
     mLookAndFeel = std::make_unique<BlomeLookAndFeel>();
     setLookAndFeel(&*mLookAndFeel);
     

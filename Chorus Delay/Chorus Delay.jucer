@@ -30,6 +30,10 @@
             file="Source/BlomeParameterSlider.h"/>
     </GROUP>
     <GROUP id="{24A7005E-CAA2-CF16-F79F-06BD0B22FE52}" name="Panels">
+      <FILE id="rutK8m" name="BlomeNoiseOverlayPanel.cpp" compile="1" resource="0"
+            file="Source/BlomeNoiseOverlayPanel.cpp"/>
+      <FILE id="DTgo1Z" name="BlomeNoiseOverlayPanel.h" compile="0" resource="0"
+            file="Source/BlomeNoiseOverlayPanel.h"/>
       <FILE id="RomMko" name="BlomePanelBase.cpp" compile="1" resource="0"
             file="Source/BlomePanelBase.cpp"/>
       <FILE id="ezyb8j" name="BlomePanelBase.h" compile="0" resource="0"
@@ -88,7 +92,10 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="RtslHJ" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <GROUP id="{586A0335-0BD9-00F7-4546-AFC27CFE5169}" name="Assets"/>
+    <GROUP id="{586A0335-0BD9-00F7-4546-AFC27CFE5169}" name="Assets">
+      <FILE id="eo7Pi4" name="noise-texture-750x300.png" compile="0" resource="1"
+            file="Assets/noise-texture-750x300.png"/>
+    </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
