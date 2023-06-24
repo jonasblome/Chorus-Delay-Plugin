@@ -17,16 +17,14 @@ ChorusDelayAudioProcessorEditor::ChorusDelayAudioProcessorEditor (ChorusDelayAud
     // editor's size to whatever you need it to be.
     setSize (MAIN_PANEL_WIDTH, MAIN_PANEL_HEIGHT);
     
+    mLookAndFeel = std::make_unique<BlomeLookAndFeel>();
+    juce::LookAndFeel::setDefaultLookAndFeel(&*mLookAndFeel);
+    
     mMainPanel = std::make_unique<BlomeMainPanel>(&audioProcessor);
     addAndMakeVisible(mMainPanel.get());
     
     mNoiseOverlayPanel = std::make_unique<BlomeNoiseOverlayPanel>(&audioProcessor);
     addAndMakeVisible(mNoiseOverlayPanel.get());
-    
-    mLookAndFeel = std::make_unique<BlomeLookAndFeel>();
-    setLookAndFeel(&*mLookAndFeel);
-    
-    juce::LookAndFeel::setDefaultLookAndFeel(&*mLookAndFeel);
 }
 
 ChorusDelayAudioProcessorEditor::~ChorusDelayAudioProcessorEditor()
