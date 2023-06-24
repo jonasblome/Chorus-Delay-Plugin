@@ -24,7 +24,11 @@ BlomePresetManager::BlomePresetManager(juce::AudioProcessor* inProcessor)
     const juce::String pluginName = (juce::String) mProcessor->getName();
     
     mPresetDirectory =
-    (juce::File::getSpecialLocation(juce::File::userDesktopDirectory)).getFullPathName() + directorySeparator + pluginName;
+        (juce::File::getSpecialLocation(juce::File::userMusicDirectory)).getFullPathName()
+        + directorySeparator
+        + "Plugins"
+        + directorySeparator
+        + pluginName;
     
     if(!juce::File(mPresetDirectory).exists()) {
         juce::File(mPresetDirectory).createDirectory();
